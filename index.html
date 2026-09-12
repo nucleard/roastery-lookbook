@@ -607,7 +607,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
   <div class="brand" id="rutaName">RUTA</div>
   <div class="scene">
     <canvas id="ground"></canvas>
-    <div class="rig"><img id="truckImg" src="img/truck.png" alt=""><canvas id="wheels"></canvas></div>
+    <div class="rig"><img id="truckImg" src="img/truck.png" data-tyres="99,131,17;197,129,15" alt=""><canvas id="wheels"></canvas></div>
   </div>
   <div class="tag">FARM TO DOOR · BADLY PAVED<br>16-BIT · <b>RUMBLING SINCE 2026</b></div>
 </section>
@@ -699,14 +699,9 @@ const truckImg=document.getElementById('truckImg'),wheelCv=document.getElementBy
 let tW=0,tH=0,tyres=[],clods=[],truckTimer=null,truckTick=0,groundY=0;
 function truckInit(){tW=truckImg.naturalWidth;tH=truckImg.naturalHeight;wheelCv.width=groundCv.width=tW;wheelCv.height=groundCv.height=tH;
   const oc=document.createElement('canvas');oc.width=tW;oc.height=tH;const o=oc.getContext('2d');o.drawImage(truckImg,0,0);const d=o.getImageData(0,0,tW,tH).data;
-  const dark=new Uint8Array(tW*tH);for(let i=0;i<tW*tH;i++)dark[i]=(d[i*4]+d[i*4+1]+d[i*4+2]<150)?1:0;
-  // tyres: the lowest dark pixels are the contact patches; split them left/right, then measure each tyre upward at its centre column
-  let bottom=-1;for(let y=tH-1;y>=0&&bottom<0;y--){let n=0;for(let x=0;x<tW;x++)if(dark[y*tW+x])n++;if(n>=6)bottom=y}
-  const xs=[];for(let y=Math.max(0,bottom-2);y<=bottom;y++)for(let x=0;x<tW;x++)if(dark[y*tW+x])xs.push(x);xs.sort((p,q)=>p-q);
-  const clusters=[];for(const x of xs){const c=clusters[clusters.length-1];if(c&&x-c.max<=12){c.max=x;c.sum+=x;c.n++}else clusters.push({min:x,max:x,sum:x,n:1})}
-  clusters.sort((p,q)=>q.n-p.n);tyres=clusters.slice(0,2).map(c=>{const cx=Math.round(c.sum/c.n);let top=bottom;
-    for(let y=bottom;y>=0;y--){const i=(y*tW+cx)*4,sat=Math.max(d[i],d[i+1],d[i+2])-Math.min(d[i],d[i+1],d[i+2]),lum=(d[i]+d[i+1]+d[i+2])/3;if(sat>45||lum>225){top=y+1;break}}
-    const r=Math.max(4,(bottom-top+1)/2);return{cx,cy:bottom-r,r,maxy:bottom}});
+  const dark=new Uint8Array(tW*tH);for(let i=0;i<tW*tH;i++)dark[i]=(d[i*4+3]>128&&d[i*4]+d[i*4+1]+d[i*4+2]<150)?1:0;
+  // tyre positions measured offline on this sprite (cx,cy,r in sprite pixels)
+  tyres=truckImg.dataset.tyres.split(';').map(t=>{const [cx,cy,r]=t.split(',').map(Number);return{cx,cy,r,maxy:cy+r}});
   groundY=tyres.length?Math.max(...tyres.map(t=>t.maxy)):tH*0.85;
   clods=[];for(let k=0;k<9;k++)clods.push(mkClod(Math.random()*tW));}
 function mkClod(x){return{x,y:groundY-1+Math.random()*4,w:2+(Math.random()*5|0),h:1+(Math.random()*2|0),v:1.5+Math.random()*2,c:Math.random()<.3?'#4f9a3a':(Math.random()<.5?'#7a4a2a':'#a0673a')}}
