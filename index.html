@@ -702,8 +702,8 @@ function truckInit(){tW=truckImg.naturalWidth;tH=truckImg.naturalHeight;wheelCv.
   const dark=new Uint8Array(tW*tH);for(let i=0;i<tW*tH;i++)dark[i]=(d[i*4]+d[i*4+1]+d[i*4+2]<150)?1:0;
   // tyres: the lowest dark pixels are the contact patches; split them left/right, then measure each tyre upward at its centre column
   let bottom=-1;for(let y=tH-1;y>=0&&bottom<0;y--){let n=0;for(let x=0;x<tW;x++)if(dark[y*tW+x])n++;if(n>=6)bottom=y}
-  const xs=[];for(let y=Math.max(0,bottom-5);y<=bottom;y++)for(let x=0;x<tW;x++)if(dark[y*tW+x])xs.push(x);xs.sort((p,q)=>p-q);
-  const clusters=[];for(const x of xs){const c=clusters[clusters.length-1];if(c&&x-c.max<=18){c.max=x;c.sum+=x;c.n++}else clusters.push({min:x,max:x,sum:x,n:1})}
+  const xs=[];for(let y=Math.max(0,bottom-2);y<=bottom;y++)for(let x=0;x<tW;x++)if(dark[y*tW+x])xs.push(x);xs.sort((p,q)=>p-q);
+  const clusters=[];for(const x of xs){const c=clusters[clusters.length-1];if(c&&x-c.max<=12){c.max=x;c.sum+=x;c.n++}else clusters.push({min:x,max:x,sum:x,n:1})}
   clusters.sort((p,q)=>q.n-p.n);tyres=clusters.slice(0,2).map(c=>{const cx=Math.round(c.sum/c.n);let top=bottom;
     for(let y=bottom;y>=0;y--){const i=(y*tW+cx)*4,sat=Math.max(d[i],d[i+1],d[i+2])-Math.min(d[i],d[i+1],d[i+2]),lum=(d[i]+d[i+1]+d[i+2])/3;if(sat>45||lum>225){top=y+1;break}}
     const r=Math.max(4,(bottom-top+1)/2);return{cx,cy:bottom-r,r,maxy:bottom}});
