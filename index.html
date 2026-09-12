@@ -43,7 +43,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 #c1{background:var(--pink);justify-content:center;align-items:flex-start}
 #c1 .sun{position:absolute;right:-28vw;top:8vh;width:90vw;height:90vw;border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--orange-l),var(--orange) 55%,var(--pink-d) 100%);animation:breathe 9s ease-in-out infinite;opacity:.95}
 @keyframes breathe{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.08) rotate(12deg)}}
-#c1 .h{font-size:min(24vw,120px);position:relative;text-shadow:.06em .06em 0 var(--orange),.12em .12em 0 var(--pink-d)}
+#c1 .h{font-size:min(19vw,110px);position:relative;text-shadow:.06em .06em 0 var(--orange),.12em .12em 0 var(--pink-d)}
 #c1 .tag{font-size:clamp(18px,5.4vw,26px);font-weight:800;margin-top:22px;max-width:16ch;line-height:1.15;position:relative}
 
 /* 2 direction A */
@@ -63,7 +63,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 #c3 .picado span{width:38px;height:56px;clip-path:polygon(0 0,100% 0,100% 70%,50% 100%,0 70%);animation:flag 3s ease-in-out infinite;box-shadow:0 4px 10px rgba(0,0,0,.2)}
 #c3 .picado span:nth-child(odd){animation-delay:-1.5s}
 @keyframes flag{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(4deg) translateY(4px)}}
-#c3 .slab{font-family:var(--slab);font-size:min(22vw,104px);line-height:.9;color:var(--pink);text-shadow:.05em .05em 0 var(--orange);position:relative}
+#c3 .slab{font-family:var(--slab);font-size:min(17vw,96px);line-height:.9;color:var(--pink);text-shadow:.05em .05em 0 var(--orange);position:relative}
 #c3 .es{font-family:var(--slab);font-size:clamp(16px,4.8vw,22px);color:var(--ink);margin:10px 0 16px;position:relative}
 #c3 .dirlabel,#c3 .dirsub,#c3 .chips{position:relative}
 
@@ -71,7 +71,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 #c4{background:#0d080c;justify-content:flex-end}
 #c4 canvas{position:absolute;inset:-6%;width:112%;height:112%;filter:blur(26px) saturate(1.2)}
 #c4 .veil{position:absolute;inset:0;background:rgba(8,6,12,.34)}
-#c4 .h{font-size:min(22vw,110px);position:relative;text-shadow:5px 5px 0 var(--pink),10px 10px 0 var(--orange)}
+#c4 .h{font-size:min(18vw,104px);position:relative;text-shadow:5px 5px 0 var(--pink),10px 10px 0 var(--orange)}
 #c4 .mono{font-size:12px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;opacity:.85;margin:16px 0 18px;position:relative}
 #c4 .dirlabel,#c4 .dirsub,#c4 .chips{position:relative}
 
@@ -236,6 +236,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 #c9 .adtile{margin:6px 0 0;transform:rotate(-1.5deg)}
 #c9 .flip{margin-top:0;padding:12px 14px;font-size:clamp(13px,3.8vw,16px)}
 
+#c11p{background:#1a0b12;justify-content:flex-end}
+#c11p .photo{position:absolute;inset:0;background:url(img/parcel.webp) center/cover}
+#c11p .eyebrow{position:relative;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+
 /* 12 divider */
 #c12{background:#0d080c;justify-content:center;align-items:center;text-align:center}
 #c12 .h{font-size:clamp(44px,14vw,70px)}
@@ -246,12 +250,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 #c13{background:#000;justify-content:space-between;font-family:'Syne',var(--body)}
 #c13 canvas{position:absolute;inset:0;width:100%;height:100%}
 #c13 .top{position:relative;font-size:11px;letter-spacing:.5em;text-transform:uppercase;opacity:.75}
-#c13 .name{position:relative;font-weight:800;font-size:clamp(40px,12.5vw,62px);letter-spacing:-.03em;line-height:.9;text-transform:uppercase;text-shadow:0 0 40px rgba(180,80,255,.6)}
+#c13 .name{position:relative;font-weight:800;font-size:clamp(32px,10vw,56px);letter-spacing:-.03em;line-height:.9;text-transform:uppercase;text-shadow:0 0 40px rgba(180,80,255,.6)}
 #c13 .name i{font-style:normal;display:block;font-weight:400;font-size:.32em;letter-spacing:.34em;margin-top:12px;opacity:.9}
 #c13 .tag{position:relative;font-size:14px;opacity:.8;max-width:24ch;margin-top:14px;line-height:1.4}
-#c13 .ring{position:absolute;left:50%;top:50%;width:62vw;height:62vw;max-width:300px;max-height:300px;border:1px solid rgba(255,255,255,.35);border-radius:50%;transform:translate(-50%,-50%);animation:ring 12s linear infinite}
-#c13 .ring::after{content:"";position:absolute;top:-4px;left:50%;width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 14px #fff}
-@keyframes ring{to{transform:translate(-50%,-50%) rotate(360deg)}}
+#c13 .dial{position:absolute;left:50%;top:50%;width:0;height:0}
+#c13 .dial i{position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 12px #fff,0 0 30px rgba(200,120,255,.8);transform:rotate(calc(var(--i)*30deg)) translateY(-34vw) scale(.35);opacity:.12;animation:dial 1.8s cubic-bezier(.4,0,.2,1) infinite;animation-delay:calc(var(--i)*-.15s)}
+@keyframes dial{0%,70%,100%{opacity:.12;transform:rotate(calc(var(--i)*30deg)) translateY(-34vw) scale(.35)}12%{opacity:1;transform:rotate(calc(var(--i)*30deg)) translateY(-34vw) scale(1)}}
+@media (min-width:700px){#c13 .dial i{transform:rotate(calc(var(--i)*30deg)) translateY(-150px) scale(.35)}@keyframes dial{0%,70%,100%{opacity:.12;transform:rotate(calc(var(--i)*30deg)) translateY(-150px) scale(.35)}12%{opacity:1;transform:rotate(calc(var(--i)*30deg)) translateY(-150px) scale(1)}}}
 
 /* 14 oye */
 #c14{background:var(--marigold);color:var(--ink);justify-content:flex-end;font-family:'Fredoka',var(--body)}
@@ -370,7 +375,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
   <div class="stage"><img class="bag tap" src="img/bag-pink.webp" alt=""><div class="shadow"></div></div>
   <div class="foot">
     <div class="dirlabel"><span class="n">A</span><span class="t">Loud &amp; sweet</span></div>
-    <p class="dirsub">Hot pink, creamsicle orange, white. One word on the bag. Nothing else on the shelf looks like this.</p>
+    <p class="dirsub">Hot pink, creamsicle orange, white. Two words on the bag and nothing else.</p>
     <div class="chips"><i class="chip" style="background:var(--pink)"></i><i class="chip" style="background:var(--orange)"></i><i class="chip" style="background:#fff"></i></div>
   </div>
 </section>
@@ -381,7 +386,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
   <div class="slab">Lucha<br>Rosa</div>
   <div class="es">Café de Chiapas, tostado en Ámsterdam.</div>
   <div class="dirlabel"><span class="n">B</span><span class="t">Fiesta</span></div>
-  <p class="dirsub">Papel picado, slab type, four colours instead of three. The investor's story on the bag.</p>
+  <p class="dirsub">Papel picado and slab type. Four colours instead of three.</p>
   <div class="chips"><i class="chip" style="background:var(--pink)"></i><i class="chip" style="background:var(--orange)"></i><i class="chip" style="background:var(--turq)"></i><i class="chip" style="background:var(--marigold)"></i></div>
 </section>
 
@@ -390,7 +395,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
   <div class="h">Lucha<br>Rosa</div>
   <div class="mono">Small batch · Chiapas · roasted Tuesday</div>
   <div class="dirlabel"><span class="n">C</span><span class="t">After dark</span></div>
-  <p class="dirsub">Same pink and orange, now as living paint under black glass. The site background never stops moving.</p>
+  <p class="dirsub">The same pink and orange as wet paint under black glass. It keeps moving while you read.</p>
   <div class="chips"><i class="chip" style="background:#0d080c"></i><i class="chip" style="background:var(--pink)"></i><i class="chip" style="background:var(--orange)"></i></div>
 </section>
 
@@ -449,14 +454,14 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
   <div class="photo"></div>
   <div class="eyebrow" style="position:relative">After the click</div>
   <div class="h">The part nobody sees</div>
-  <p class="sub">Everything below happens on its own. Nobody types any of it.</p>
+  <p class="sub">All of this sends itself.</p>
   <div class="notifs" id="notifs">
     <div class="ntf"><div class="ic p">✓</div><div><b>Order confirmed</b><span>Two bags, Alba + Noche. Roast slot booked for Tuesday.</span></div><em>Sun 21:14</em></div>
     <div class="ntf"><div class="ic">🔥</div><div><b>Roasted this morning</b><span>08:12 · batch 217. Roast date printed on your bag.</span></div><em>Tue 08:40</em></div>
     <div class="ntf"><div class="ic">📦</div><div><b>On its way</b><span>PostNL picked up. Arrives tomorrow before 18:00.</span></div><em>Tue 16:05</em></div>
     <div class="ntf"><div class="ic p">↻</div><div><b>Next bag roasts in 12 days</b><span>Change grind, skip, or pause. One tap.</span></div><em>Thu 09:00</em></div>
   </div>
-  <div class="kicker">Roaster gets a list on Monday. Courier gets a label. Customer gets coffee. Repeat.</div>
+  <div class="kicker">The roaster gets a list on Monday morning. That's the only thing anyone does by hand.</div>
 </section>
 
 <section class="card" id="c9">
@@ -480,7 +485,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
       <div class="row2 good"><b>€190</b><span>subscriber, 12 months · 13×</span></div>
     </div>
   </div>
-  <div class="flip">Same benchmarks, both columns. <em>The difference is who runs the back end.</em></div>
+  <div class="flip">Same coffee, same public numbers. <em>The right column just has someone paying attention.</em></div>
 </section>
 
 <section class="card" id="c10">
@@ -512,22 +517,26 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
     <div class="tier"><div class="n" data-count="500">0</div><div class="l">subscribers · one salary</div><div class="r"><span>250 kg<small>roasted / mo</small></span><span>€13,500<small>revenue / mo</small></span><span>€7,930<small>margin / mo</small></span></div></div>
     <div class="tier"><div class="n" data-count="1000">0</div><div class="l">a real company · roasting falls to €0.30/bag</div><div class="r"><span>500 kg<small>roasted / mo</small></span><span>€27,000<small>revenue / mo</small></span><span>€15,860<small>margin / mo</small></span></div></div>
   </div>
-  <div class="end"><div class="logo">LUCHA ROSA</div><p>Made in one afternoon. Imagine a year.</p><small>Every number here is a public benchmark, not a promise. Before wholesale, café, or gear.</small></div>
+  <div class="end"><div class="logo">LUCHA ROSA</div><small>Every number here is a public benchmark, not a promise. Online bags only, before wholesale, café or gear.</small></div>
 </section>
 
+<section class="card" id="c11p">
+  <div class="photo"></div>
+  <div class="eyebrow">On the doorstep</div>
+</section>
 <section class="card" id="c12">
   <div class="h">Keep<br>swiping.</div>
-  <p>Seven more brands. None of them real. Each one was an hour.</p>
+  <p>Eight more brands, none of them real, just to show the range.</p>
   <div class="arrow">→</div>
 </section>
 
 <section class="card" id="c13">
   <canvas id="vortex"></canvas>
-  <div class="ring"></div>
+  <div class="dial"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i></div>
   <div class="top">Nightshift roasters · AMS-N</div>
   <div>
     <div class="name">Vórtice<i>espresso after dark</i></div>
-    <p class="tag">Coffee for the hours nobody admits to. Roasted at midnight, delivered before you're up.</p>
+    <p class="tag">Roasted at midnight. At your door before you're up.</p>
   </div>
 </section>
 
@@ -589,7 +598,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
     <div class="ln">FARMER'S SHARE      3.10</div>
     <div class="ln">BTW 9%              1.11</div>
     <div class="ln">------------------------</div>
-    <div class="ln hd" style="font-size:14px">NOTHING HIDDEN. EVER.</div>
+    <div class="ln hd" style="font-size:14px">THANKS. SEE YOU IN TWO WEEKS.</div>
     <div class="bar"></div>
   </div>
 </section>
@@ -598,7 +607,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
   <div class="photo"></div>
   <div class="panel">
     <div class="name">sobremesa</div>
-    <p class="tag">The coffee after the meal after the meal. For tables that don't clear until midnight.</p>
+    <p class="tag">For tables that don't clear until midnight.</p>
     <div class="pills"><span>decaf that's actually good</span><span>sunday delivery</span><span>bag feeds a table</span></div>
   </div>
 </section>
@@ -609,25 +618,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
     <canvas id="ground"></canvas>
     <div class="rig"><img id="truckImg" src="img/truck.png" data-tyres="99,131,17;197,129,15" alt=""><canvas id="wheels"></canvas></div>
   </div>
-  <div class="tag">FARM TO DOOR · BADLY PAVED<br>16-BIT · <b>RUMBLING SINCE 2026</b></div>
+  <div class="tag">FARM TO DOOR, BADLY PAVED<br>PRESS START <b>_</b></div>
 </section>
 
-<section class="card" id="c20">
-  <div class="eyebrow">Nine worlds, one afternoon</div>
-  <div class="h">Pick a mood.</div>
-  <div class="menu" id="menu">
-    <div><span class="m1">LUCHA ROSA</span><small>loud &amp; sweet</small></div>
-    <div><span class="m2">VÓRTICE</span><small>after dark</small></div>
-    <div><span class="m3">OYE</span><small>texts you back</small></div>
-    <div><span class="m4">Tacaná</span><small>gallery quiet</small></div>
-    <div><span class="m5">RUIDO</span><small>too much</small></div>
-    <div><span class="m6">Madrugada</span><small>first light</small></div>
-    <div><span class="m7">TICKET</span><small>nothing hidden</small></div>
-    <div><span class="m8">sobremesa</span><small>stays late</small></div>
-    <div><span class="m9">RUTA</span><small>16-bit, badly paved</small></div>
-  </div>
-  <p>Or none of these. The next one takes an hour.</p>
-</section>
 
 </main>
 <script>
@@ -718,7 +711,7 @@ truckImg.addEventListener('load',truckInit);
 function seq(els,cls,start,step){els.forEach(x=>x.classList.remove(cls));return els.map((x,i)=>setTimeout(()=>x.classList.add(cls),start+i*step))}
 let seqT=[];function play(...runs){seqT.forEach(clearTimeout);seqT=[].concat(...runs)}
 const colA=[...document.querySelectorAll('#colA .row2')],colB=[...document.querySelectorAll('#colB .row2')];
-const bubs=[...document.querySelectorAll('#bubbles .bub')],lns=[...document.querySelectorAll('#paper .ln, #paper .bar')],menu=[...document.querySelectorAll('#menu div')];
+const bubs=[...document.querySelectorAll('#bubbles .bub')],lns=[...document.querySelectorAll('#paper .ln, #paper .bar')];
 const enterFx={
   c8:()=>play(seq(ntfs,'in',500,850)),
   c9:()=>play(seq(colA,'in',400,140),seq(colB,'in',400+5*140+1300,140)),
@@ -726,7 +719,6 @@ const enterFx={
   c11:()=>document.querySelectorAll('[data-count]').forEach(count),
   c14:()=>play(seq(bubs,'in',500,700)),
   c18:()=>play(seq(lns,'in',400,110)),
-  c20:()=>play(seq(menu,'in',300,110)),
 };
 function onEnter(i){const id=cards[i].id;if(enterFx[id])enterFx[id]();paintOn=(id==='c4');paint2On=(id==='c16');glOn=(id==='c13');if(glOn&&!gl)glInit();truckRun(id==='c21')}
 const h0=parseInt(location.hash.slice(1));if(h0>=1&&h0<=N){deck.scrollLeft=(h0-1)*deck.clientWidth;setIdx(h0-1)}else setIdx(0);
