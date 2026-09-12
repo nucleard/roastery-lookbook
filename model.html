@@ -33,12 +33,16 @@ td{text-align:right;padding:7px 4px;border-top:1px solid #f0e6ea;font-weight:600
 td.hi{color:var(--pink);font-weight:800}
 .note{font-size:11px;opacity:.6;font-weight:600;line-height:1.45;margin-top:16px}
 .wrap{overflow-x:auto}
+.reset{font:800 12px var(--body);letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--ink);border:0;border-radius:99px;padding:10px 16px;margin:-6px 0 16px;cursor:pointer;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.reset:active{transform:scale(.95)}
+.reset.dirty{background:var(--pink)}
 </style>
 </head>
 <body>
 <div class="eyebrow">Café + webshop, no venture money</div>
 <h1>Subscribers,<br>month by month</h1>
 <p class="sub">Drag the sliders. Everything recalculates. Defaults are deliberately unheroic.</p>
+<button id="reset" class="reset">Reset to defaults</button>
 
 <div class="big">
   <div class="kpi"><b id="k500">—</b><span>month we pass 500 subscribers</span></div>
@@ -113,7 +117,11 @@ function draw(rows,sal){
   c.strokeStyle='#ff2a8a';c.lineWidth=5;c.lineJoin='round';c.beginPath();rows.forEach((r,i)=>{i?c.lineTo(x(i),ys(r.subs)):c.moveTo(x(i),ys(r.subs))});c.stroke();
   c.fillStyle='#8a6a75';c.textAlign='center';[1,6,12,18,24].forEach(m=>c.fillText('m'+m,x(m-1),H-12));
 }
-ids.forEach(k=>$(k).addEventListener('input',run));run();
+const DEF={};ids.forEach(k=>DEF[k]=$(k).value);
+function dirty(){$('reset').classList.toggle('dirty',ids.some(k=>$(k).value!==DEF[k]))}
+ids.forEach(k=>$(k).addEventListener('input',()=>{run();dirty()}));
+$('reset').addEventListener('click',()=>{ids.forEach(k=>$(k).value=DEF[k]);run();dirty()});
+run();
 </script>
 </body>
 </html>
