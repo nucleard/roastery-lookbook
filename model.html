@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ff2a8a">
+<title>Subscribers, month by month</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ff2a8a;--pink-d:#d9146c;--orange:#ff9a3c;--cream:#fff4e6;--ink:#1a0b12;--disp:'Archivo Black',system-ui,sans-serif;--body:'Archivo',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#fff;color:var(--ink);font-family:var(--body);padding:22px 18px 40px;max-width:520px;margin:0 auto}
+h1{font-family:var(--disp);font-size:clamp(26px,8vw,36px);line-height:.95;color:var(--pink);text-transform:uppercase;margin:6px 0 4px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.28em;text-transform:uppercase;opacity:.7}
+.sub{font-weight:600;font-size:13px;opacity:.75;margin-bottom:16px;line-height:1.4}
+.big{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.kpi{background:var(--cream);border-radius:16px;padding:12px 14px}
+.kpi b{display:block;font-family:var(--disp);font-size:clamp(22px,7vw,30px);color:var(--pink);line-height:1}
+.kpi span{display:block;font-size:11px;font-weight:700;opacity:.7;margin-top:4px;line-height:1.25}
+canvas{width:100%;height:220px;display:block;margin-bottom:6px}
+.legend{display:flex;gap:16px;font-size:11px;font-weight:700;opacity:.75;margin-bottom:18px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:5px}
+h2{font-family:var(--disp);font-size:14px;letter-spacing:.06em;text-transform:uppercase;margin:18px 0 8px}
+.sl{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;padding:8px 0;border-bottom:1px solid #f0e6ea}
+.sl label{font-weight:700;font-size:13px}
+.sl small{grid-column:1;font-size:11px;opacity:.6;font-weight:600}
+.sl output{grid-column:2;grid-row:1/3;font-family:var(--disp);font-size:18px;color:var(--pink);min-width:5.5ch;text-align:right}
+.sl input{grid-column:1/3;width:100%;accent-color:var(--pink);margin-top:6px}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px}
+th{font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.6;text-align:right;padding:6px 4px;font-weight:800}
+th:first-child,td:first-child{text-align:left}
+td{text-align:right;padding:7px 4px;border-top:1px solid #f0e6ea;font-weight:600;white-space:nowrap}
+td.hi{color:var(--pink);font-weight:800}
+.note{font-size:11px;opacity:.6;font-weight:600;line-height:1.45;margin-top:16px}
+.wrap{overflow-x:auto}
+</style>
+</head>
+<body>
+<div class="eyebrow">Café + webshop, no venture money</div>
+<h1>Subscribers,<br>month by month</h1>
+<p class="sub">Drag the sliders. Everything recalculates. Defaults are deliberately unheroic.</p>
+
+<div class="big">
+  <div class="kpi"><b id="k500">—</b><span>month we pass 500 subscribers</span></div>
+  <div class="kpi"><b id="kSal">—</b><span>month the margin covers the salary target</span></div>
+  <div class="kpi"><b id="k12">—</b><span>subscribers after 12 months</span></div>
+  <div class="kpi"><b id="kM12">—</b><span>gross margin in month 12, after ads</span></div>
+</div>
+
+<canvas id="ch" width="900" height="440"></canvas>
+<div class="legend"><span><i style="background:var(--pink)"></i>subscribers</span><span><i style="background:var(--orange)"></i>margin per month, after ads</span><span><i style="background:#ddd"></i>salary target</span></div>
+
+<h2>The café</h2>
+<div class="sl"><label>Distinct customers a month</label><small>≈ drinks a day × 26 days ÷ 1.6 visits each</small><output id="oPeople"></output><input type="range" id="people" min="500" max="6000" step="100" value="2400"></div>
+<div class="sl"><label>Who subscribe, per month</label><small>staff ask, card in every bag, first box discounted</small><output id="oConv"></output><input type="range" id="conv" min="0" max="4" step="0.1" value="1.2"></div>
+
+<h2>The webshop</h2>
+<div class="sl"><label>Ad spend a month</label><small>retargeting + a little Shopping</small><output id="oAds"></output><input type="range" id="ads" min="0" max="3000" step="50" value="300"></div>
+<div class="sl"><label>Cost per paid subscriber</label><small>no-name brand: €30–50 is realistic</small><output id="oCac"></output><input type="range" id="cac" min="10" max="100" step="1" value="40"></div>
+<div class="sl"><label>Referrals, per 100 subscribers a month</label><small>give a bag, get a bag; people talk</small><output id="oRef"></output><input type="range" id="ref" min="0" max="10" step="0.5" value="3"></div>
+<div class="sl"><label>Churn a month</label><small>industry 8–10%; good retention work gets 5%</small><output id="oChurn"></output><input type="range" id="churn" min="2" max="15" step="0.5" value="7"></div>
+
+<h2>The money</h2>
+<div class="sl"><label>Bags per subscriber a month</label><output id="oBags"></output><input type="range" id="bags" min="1" max="4" step="0.5" value="2"></div>
+<div class="sl"><label>Gross margin per bag</label><small>€13.50 bag, toll roasted: €7.93</small><output id="oMargin"></output><input type="range" id="margin" min="4" max="12" step="0.01" value="7.93"></div>
+<div class="sl"><label>Salary target, per month</label><small>gross margin needed, before tax and overhead</small><output id="oSal"></output><input type="range" id="sal" min="1500" max="8000" step="100" value="3500"></div>
+
+<div class="wrap"><table id="tbl"><thead><tr><th>Month</th><th>From café</th><th>Paid</th><th>Referral</th><th>Lost</th><th>Subscribers</th><th>Margin</th></tr></thead><tbody></tbody></table></div>
+
+<p class="note">Café conversions count only people not already subscribed. Referrals scale with the base, so the curve bends up in year two. Margin is bags × margin per bag minus ad spend; shipping is assumed paid by the customer or covered by the free-shipping threshold. Retail bags over the counter, wholesale and the café's own income are not in here at all; this is the webshop leg alone.</p>
+
+<script>
+const $=id=>document.getElementById(id);
+const ids=['people','conv','ads','cac','ref','churn','bags','margin','sal'];
+const fmt={people:v=>v.toLocaleString('en'),conv:v=>v.toFixed(1)+'%',ads:v=>'€'+v,cac:v=>'€'+v,ref:v=>v,churn:v=>v.toFixed(1)+'%',bags:v=>v,margin:v=>'€'+v.toFixed(2),sal:v=>'€'+v.toLocaleString('en')};
+const eur=v=>'€'+Math.round(v).toLocaleString('en');
+function run(){
+  const p={};ids.forEach(k=>{p[k]=+$(k).value;$('o'+k[0].toUpperCase()+k.slice(1)).textContent=fmt[k](p[k])});
+  const rows=[];let subs=0;
+  for(let m=1;m<=24;m++){
+    const cafe=Math.max(0,(p.people-subs))*p.conv/100;
+    const paid=p.cac>0?p.ads/p.cac:0;
+    const refs=subs*p.ref/100;
+    const lost=subs*p.churn/100;
+    subs=Math.max(0,subs+cafe+paid+refs-lost);
+    const margin=subs*p.bags*p.margin-p.ads;
+    rows.push({m,cafe,paid,refs,lost,subs,margin});
+  }
+  const m500=rows.find(r=>r.subs>=500),mSal=rows.find(r=>r.margin>=p.sal);
+  $('k500').textContent=m500?'month '+m500.m:'not in 2 yrs';
+  $('kSal').textContent=mSal?'month '+mSal.m:'not in 2 yrs';
+  $('k12').textContent=Math.round(rows[11].subs).toLocaleString('en');
+  $('kM12').textContent=eur(rows[11].margin);
+  draw(rows,p.sal);
+  const tb=$('tbl').querySelector('tbody');tb.innerHTML='';
+  for(const r of rows.filter(r=>[1,2,3,6,9,12,15,18,24].includes(r.m))){
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${r.m}</td><td>+${Math.round(r.cafe)}</td><td>+${Math.round(r.paid)}</td><td>+${Math.round(r.refs)}</td><td>−${Math.round(r.lost)}</td><td class="hi">${Math.round(r.subs).toLocaleString('en')}</td><td>${eur(r.margin)}</td>`;
+    tb.appendChild(tr);
+  }
+}
+function draw(rows,sal){
+  const cv=$('ch'),c=cv.getContext('2d'),W=cv.width,H=cv.height,L=64,R=76,T=18,B=40;
+  c.clearRect(0,0,W,H);
+  const maxS=Math.max(600,Math.ceil(Math.max(...rows.map(r=>r.subs))/250)*250);
+  const maxM=Math.max(sal*1.2,Math.ceil(Math.max(...rows.map(r=>r.margin),0)/2000)*2000);
+  const x=i=>L+(W-L-R)*(i/23),ys=v=>T+(H-T-B)*(1-v/maxS),ym=v=>T+(H-T-B)*(1-Math.max(0,v)/maxM);
+  c.font='600 18px Archivo, system-ui';c.textAlign='left';
+  for(let k=0;k<=4;k++){const v=maxS*k/4;c.strokeStyle='#f0e6ea';c.lineWidth=1;c.beginPath();c.moveTo(L,ys(v));c.lineTo(W-R,ys(v));c.stroke();c.fillStyle='#b58';c.textAlign='right';c.fillText(Math.round(v),L-8,ys(v)+6);c.fillStyle='#c97';c.textAlign='left';c.fillText('€'+Math.round(maxM*k/4/1000)+'k',W-R+8,ym(maxM*k/4)+6)}
+  c.fillStyle='#ffe4c4';const bw=(W-L-R)/24*.6;rows.forEach((r,i)=>{if(r.margin>0)c.fillRect(x(i)-bw/2,ym(r.margin),bw,ym(0)-ym(r.margin))});
+  c.fillStyle='var(--orange)';c.fillStyle='#ff9a3c';rows.forEach((r,i)=>{if(r.margin>0)c.fillRect(x(i)-bw/2,ym(r.margin),bw,Math.max(3,(ym(0)-ym(r.margin))*.18))});
+  c.setLineDash([8,8]);c.strokeStyle='#ccc';c.lineWidth=2;c.beginPath();c.moveTo(L,ym(sal));c.lineTo(W-R,ym(sal));c.stroke();c.setLineDash([]);
+  c.strokeStyle='#ff2a8a';c.lineWidth=5;c.lineJoin='round';c.beginPath();rows.forEach((r,i)=>{i?c.lineTo(x(i),ys(r.subs)):c.moveTo(x(i),ys(r.subs))});c.stroke();
+  c.fillStyle='#8a6a75';c.textAlign='center';[1,6,12,18,24].forEach(m=>c.fillText('m'+m,x(m-1),H-12));
+}
+ids.forEach(k=>$(k).addEventListener('input',run));run();
+</script>
+</body>
+</html>
