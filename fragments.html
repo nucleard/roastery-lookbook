@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050403">
+<title>Everyday Fragments — Lucha Rosa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;600&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<style>
+html,body{height:100%;margin:0;background:#050403;overflow:hidden;-webkit-user-select:none;user-select:none}
+canvas#gl{position:fixed;inset:0;width:100%;height:100%;display:block;cursor:crosshair}
+canvas#txt{display:none}
+#nogl{position:fixed;inset:0;display:none;place-items:center;color:#c9b8a8;font:15px/1.5 Archivo,system-ui,sans-serif;text-align:center;padding:24px}
+</style></head><body>
+<canvas id="gl"></canvas>
+<canvas id="txt"></canvas>
+<div id="nogl">This page needs WebGL2.</div>
+<script>
+// ---------- config (URL overrides: ?brand=&tag=&meta=&seed=&speed=&text=0) ----------
+const q=new URLSearchParams(location.search);
+const BRAND=q.get('brand')||'LUCHA ROSA';
+const TAG=q.get('tag')||'Mexican coffee, roasted in Amsterdam.';
+const META=q.get('meta')||'EVERYDAY FRAGMENTS · N°01 · AMS';
+const SEED=+(q.get('seed')||7);
+const SPEED=+(q.get('speed')||1);
+let showText=q.get('text')!=='0';
+
+const cv=document.getElementById('gl'),tcv=document.getElementById('txt');
+const gl=cv.getContext('webgl2',{antialias:false,alpha:false,powerPreference:'high-performance'});
+if(!gl){document.getElementById('nogl').style.display='grid';throw new Error('no webgl2');}
+
+// ---------- shaders ----------
+const VS=`#version 300 es
+void main(){vec2 p=vec2((gl_VertexID<<1)&2,gl_VertexID&2);gl_Position=vec4(p*2.-1.,0,1);}`;
+
+// pass 1: the room. water reflections projected through a broken grid of panes onto a dark wall.
+const SCENE=`#version 300 es
+precision highp float;
+out vec4 o;
+uniform vec2 uRes;uniform float uT;uniform vec2 uLight;uniform vec2 uDrift;
+uniform int uN;uniform vec4 uP[16];uniform float uSeed;
+
+float hash(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+float vnoise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+  return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+1.),f.x),f.y);}
+
+// water surface height: three crossing swells plus warped fine ripples, everything drifting slowly.
+float height(vec2 w,float t){
+  float h=0.;
+  h+=0.50*sin(dot(w,vec2(1.0,0.35))*3.1+t*0.75);
+  h+=0.30*sin(dot(w,vec2(-0.6,1.0))*4.7-t*1.05);
+  h+=0.18*sin(dot(w,vec2(0.9,-0.8))*7.3+t*1.45);
+  vec2 q=w*3.0+vec2(t*0.13,-t*0.06);
+  float n=vnoise(q)*0.5+vnoise(q*2.1+13.)*0.25+vnoise(q*4.3+7.)*0.125;
+  h+=1.0*(n-0.44);
+  return h;
+}
+
+vec3 water(vec2 w,float t){
+  float e=0.02;
+  float h=height(w,t),hx=height(w+vec2(e,0),t),hy=height(w+vec2(0,e),t);
+  vec3 n=normalize(vec3(-(hx-h)/e*0.32,-(hy-h)/e*0.32,1.0));
+  vec3 r=reflect(vec3(0,0,-1),n);
+  vec3 L1=normalize(vec3(0.10+uLight.x,0.42+uLight.y,0.80));   // the white streetlight
+  vec3 L2=normalize(vec3(-0.62,0.18,0.70));                     // a sodium lamp off to the left
+  float d1=max(dot(r,L1),0.),d2=max(dot(r,L2),0.);
+  float s0=pow(d1,5.),s1=pow(d1,60.),s2=pow(d2,18.);            // broad wash, hot core, warm lamp
+  float sky=smoothstep(-0.25,0.95,r.y);                         // facing the lit side of the canal
+  vec2 g=w*26.+vec2(t*0.7,t*0.25);
+  float sp=pow(vnoise(g)*vnoise(g*1.9+5.3),7.)*9.*pow(d1,7.);   // glitter
+  vec3 col=sky*vec3(0.42,0.46,0.52)*0.35
+          +s0*1.5*vec3(1.0,0.96,0.90)
+          +s1*2.2*vec3(1.0,0.98,0.94)
+          +s2*0.8*vec3(1.0,0.72,0.42)
+          +sp*vec3(1.0,0.98,0.95);
+  return col;
+}
+
+float box(vec2 p,vec4 r,float soft){vec2 d=abs(p-r.xy)-r.zw;float m=max(d.x,d.y);return 1.-smoothstep(-soft,soft,m);}
+
+void main(){
+  float asp=uRes.x/uRes.y;
+  vec2 uv=gl_FragCoord.xy/uRes;
+  vec2 p=(uv-0.5)*vec2(asp,1.0)+uDrift;
+  float t=uT;
+
+  // the wall: dark plaster, amber light bleeding in from the left, a faint pool of light where the panes are.
+  vec3 wall=vec3(0.022,0.015,0.011);
+  float amber=smoothstep(0.10,-0.70*asp,p.x)*smoothstep(0.45,-0.55,p.y)*(0.5+0.5*vnoise(p*2.5+vec2(t*0.015,0.)));
+  wall+=vec3(0.26,0.11,0.035)*amber;
+  float plaster=vnoise(p*45.)*0.5+vnoise(p*95.+3.)*0.5;
+  wall*=0.82+0.36*plaster;
+
+  vec3 col=wall;
+  float haze=0.;
+  float swell=0.82+0.18*sin(t*0.11+uSeed);
+  // cheap loop: find which pane (if any) this pixel sits in; the water is evaluated once, below.
+  float m=0.,fi=0.,rim=0.;
+  for(int i=0;i<16;i++){
+    if(i>=uN)break;
+    vec4 r=uP[i];
+    haze+=box(p,r,0.14)*0.06;
+    float mi=box(p,r,0.0055);
+    if(mi>m){m=mi;fi=float(i);vec2 d=abs(p-r.xy)-r.zw;rim=1.-smoothstep(0.,0.012,abs(max(d.x,d.y)));}
+  }
+  if(m>0.001){
+    // each pane is a slightly different piece of glass: small offset, small scale change, own slow brightness.
+    vec2 w=p*vec2(1.0,1.9)*1.55+vec2(hash(vec2(fi,uSeed)),hash(vec2(fi+9.,uSeed)))*0.35;
+    w*=0.92+0.16*hash(vec2(fi+3.,uSeed));
+    w+=vec2(t*0.045,-t*0.018);
+    float b=(0.50+0.85*vnoise(vec2(fi*3.7+uSeed,t*0.07)))*swell;
+    vec3 wc=water(w,t);
+    col=mix(col,wc*b+rim*0.05,m);
+  }
+  col+=haze*vec3(0.50,0.46,0.42)*(0.5+0.5*swell);
+  o=vec4(col*0.25,1.);   // stored at 1/4 so highlights survive RGBA8
+}`;
+
+// pass 2: the print. bloom, chromatic fringing, film grain, vignette, tone, and the type.
+const POST=`#version 300 es
+precision highp float;
+out vec4 o;
+uniform sampler2D uScene,uText;uniform vec2 uRes;uniform float uT,uTextOn;
+float hash(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+vec3 scn(vec2 uv){return texture(uScene,uv).rgb*4.;}
+void main(){
+  vec2 uv=gl_FragCoord.xy/uRes;
+  vec2 c=(uv-0.5)*vec2(uRes.x/uRes.y,1.);
+  float rr=dot(c,c);
+  // radial chromatic aberration, stronger toward the edges
+  vec2 ca=(uv-0.5)*(0.006+rr*0.028);
+  vec3 col=vec3(scn(uv+ca).r,scn(uv).g,scn(uv-ca).b);
+  // soft focus + horizontally stretched bloom (the streaky long-lens look)
+  vec3 bl=vec3(0.);float ws=0.;
+  for(int i=-7;i<=7;i++){float w=exp(-float(i*i)/18.);bl+=scn(uv+vec2(float(i)*3.2/uRes.x,0.))*w;ws+=w;}
+  for(int j=-2;j<=2;j++){if(j==0)continue;float w=exp(-float(j*j)/2.5)*0.6;bl+=scn(uv+vec2(0.,float(j)*2.4/uRes.y))*w;ws+=w;}
+  bl/=ws;
+  col=mix(col,bl,0.42);
+  col+=max(bl-0.22,0.)*0.75;
+  // the type, fringed the same way
+  vec3 tx=vec3(texture(uText,uv+ca*0.35).r,texture(uText,uv).r,texture(uText,uv-ca*0.35).r);
+  col+=tx*uTextOn*vec3(0.94,0.92,0.88);
+  // tone: gentle roll-off, a touch of desaturation, warm
+  col=col/(1.+col*0.55)*1.35;
+  col=mix(col,vec3(dot(col,vec3(.3,.59,.11))),0.10);
+  col*=vec3(1.03,0.985,0.93);
+  // grain, 24 fps cadence, clumpier in the shadows
+  float fr=floor(uT*24.)/24.;
+  vec2 gp=floor(gl_FragCoord.xy/1.6);
+  float g=hash(gp+fract(fr*0.731)*913.);
+  float g2=hash(gp*0.5+fract(fr*0.377)*517.);
+  float lum=dot(col,vec3(.3,.59,.11));
+  col+=(g-0.5)*0.13*(0.45+0.55*(1.-smoothstep(0.,0.9,lum)));
+  col+=(g2-0.5)*0.04;
+  col+=vec3(0.012,0.010,0.009);   // black lift, like a print
+  // vignette and a dark frame edge
+  float v=1.-smoothstep(0.18,1.15,rr*1.15);
+  col*=mix(0.22,1.,v);
+  o=vec4(col,1.);
+}`;
+
+function sh(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);
+  if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s));return s;}
+function prog(fs){const p=gl.createProgram();gl.attachShader(p,sh(gl.VERTEX_SHADER,VS));gl.attachShader(p,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(p);
+  if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(p));return p;}
+const P1=prog(SCENE),P2=prog(POST);
+const U=(p,n)=>gl.getUniformLocation(p,n);
+const u1={res:U(P1,'uRes'),t:U(P1,'uT'),light:U(P1,'uLight'),drift:U(P1,'uDrift'),n:U(P1,'uN'),p:U(P1,'uP'),seed:U(P1,'uSeed')};
+const u2={scene:U(P2,'uScene'),text:U(P2,'uText'),res:U(P2,'uRes'),t:U(P2,'uT'),on:U(P2,'uTextOn')};
+gl.bindVertexArray(gl.createVertexArray());
+
+// ---------- render targets ----------
+function tex(){const t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);return t;}
+const sceneTex=tex(),textTex=tex(),fbo=gl.createFramebuffer();
+let W=0,H=0,SW=0,SH=0;
+
+// ---------- pane layout: a broken grid, seeded ----------
+let rnd;function seedRnd(s){let a=s*9301+49297;rnd=()=>{a=(a*1103515245+12345)&0x7fffffff;return a/0x7fffffff;};}
+let panes=[];
+function layout(asp){
+  seedRnd(SEED);
+  const land=asp>1.1;
+  const groupW=Math.min(asp*0.86,1.25);
+  const cols=land?4:3;
+  const pitch=groupW/cols,colW=pitch*0.80;
+  const yTop=land?0.20:0.14,yBot=land?-0.44:-0.46,span=yTop-yBot;
+  const x0=-groupW/2+(land?0.05:0)+pitch/2;
+  panes=[];
+  for(let c=0;c<cols;c++){
+    let y=yTop-rnd()*0.10*span/0.64;
+    let first=true;
+    while(y>yBot+0.10&&panes.length<16){
+      const h=(0.14+rnd()*0.20)*span/0.64;
+      const skip=!first&&rnd()<0.22;
+      if(!skip)panes.push([x0+c*pitch+(rnd()-.5)*0.02,y-h/2,colW/2*(0.72+rnd()*0.28),h/2]);
+      y-=h+0.03+rnd()*0.06;first=false;
+    }
+  }
+}
+
+// ---------- the type ----------
+const tctx=tcv.getContext('2d');
+function spaced(ctx,str,x,y,track,fit){ // manual tracking, works everywhere; fit = max width
+  let w=[...str].reduce((a,ch)=>a+ctx.measureText(ch).width+track,0)-track;
+  if(fit&&w>fit){const k=fit/w;const f=ctx.font.match(/([\d.]+)px/);ctx.font=ctx.font.replace(f[0],(parseFloat(f[1])*k).toFixed(1)+'px');track*=k;w=fit;}
+  let cx=x-w/2;for(const ch of str){ctx.fillText(ch,cx,y);cx+=ctx.measureText(ch).width+track;}
+}
+function drawText(){
+  tcv.width=W;tcv.height=H;const ctx=tctx;ctx.clearRect(0,0,W,H);
+  const dpr=W/innerWidth,land=W/H>1.1;
+  const vw=W/100;
+  ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='left';
+  const cx=W/2,cy=H*(land?0.24:0.21);
+  const metaS=Math.min(12.5*dpr,vw*2.8);
+  ctx.font=`400 ${metaS}px Archivo, system-ui, sans-serif`;
+  ctx.globalAlpha=0.55;spaced(ctx,META,cx,cy-(land?H*0.10:H*0.075),metaS*0.32,W*0.86);
+  const brandS=land?Math.min(vw*6.2,86*dpr):vw*8.6;
+  ctx.font=`300 ${brandS}px Archivo, system-ui, sans-serif`;
+  ctx.globalAlpha=1;spaced(ctx,BRAND,cx,cy,brandS*0.42,W*0.86);
+  const tagS=land?Math.min(vw*2.1,28*dpr):vw*4.6;
+  ctx.font=`italic 300 ${tagS}px "Cormorant Garamond", Georgia, serif`;
+  ctx.globalAlpha=0.85;spaced(ctx,TAG,cx,cy+(land?H*0.095:H*0.072),tagS*0.04,W*0.86);
+  ctx.globalAlpha=1;
+  gl.bindTexture(gl.TEXTURE_2D,textTex);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);
+  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,tcv);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);
+}
+document.fonts&&document.fonts.ready.then(()=>{if(W)drawText();});
+
+// ---------- resize ----------
+function resize(){
+  const dpr=Math.min(devicePixelRatio||1,2);
+  W=Math.round(innerWidth*dpr);H=Math.round(innerHeight*dpr);
+  cv.width=W;cv.height=H;
+  const s=Math.min(0.5,1000/Math.max(W,H));SW=Math.max(2,Math.round(W*s));SH=Math.max(2,Math.round(H*s));
+  gl.bindTexture(gl.TEXTURE_2D,sceneTex);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,SW,SH,0,gl.RGBA,gl.UNSIGNED_BYTE,null);
+  gl.bindFramebuffer(gl.FRAMEBUFFER,fbo);gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.COLOR_ATTACHMENT0,gl.TEXTURE_2D,sceneTex,0);
+  gl.bindFramebuffer(gl.FRAMEBUFFER,null);
+  layout(W/H);drawText();
+}
+addEventListener('resize',resize);resize();
+
+// ---------- pointer nudges the streetlight, slowly ----------
+let lt=[0,0],lc=[0,0];
+function point(x,y){lt=[(x/innerWidth-0.5)*0.55,-(y/innerHeight-0.5)*0.35];}
+addEventListener('pointermove',e=>point(e.clientX,e.clientY));
+addEventListener('touchmove',e=>{const t=e.touches[0];point(t.clientX,t.clientY);},{passive:true});
+addEventListener('keydown',e=>{if(e.key==='t')showText=!showText;});
+let holdT=0;addEventListener('pointerdown',()=>{holdT=setTimeout(()=>showText=false,350);});
+addEventListener('pointerup',()=>{clearTimeout(holdT);showText=true;});addEventListener('pointercancel',()=>{clearTimeout(holdT);showText=true;});
+
+// ---------- loop ----------
+const t0=performance.now()-Math.random()*600000;
+const flat=new Float32Array(64);
+function frame(now){
+  const t=(now-t0)/1000*SPEED;
+  lc[0]+=(lt[0]-lc[0])*0.02;lc[1]+=(lt[1]-lc[1])*0.02;
+  // handheld drift: two slow sines, a few pixels, never a cut
+  const dx=(Math.sin(t*0.21)*0.5+Math.sin(t*0.37)*0.5)*0.006,dy=(Math.cos(t*0.17)+Math.sin(t*0.29)*0.5)*0.004;
+
+  gl.bindFramebuffer(gl.FRAMEBUFFER,fbo);gl.viewport(0,0,SW,SH);gl.useProgram(P1);
+  gl.uniform2f(u1.res,SW,SH);gl.uniform1f(u1.t,t);gl.uniform2f(u1.light,lc[0],lc[1]);gl.uniform2f(u1.drift,dx,dy);
+  gl.uniform1i(u1.n,panes.length);for(let i=0;i<panes.length;i++)flat.set(panes[i],i*4);gl.uniform4fv(u1.p,flat);gl.uniform1f(u1.seed,SEED);
+  gl.drawArrays(gl.TRIANGLES,0,3);
+
+  gl.bindFramebuffer(gl.FRAMEBUFFER,null);gl.viewport(0,0,W,H);gl.useProgram(P2);
+  gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,sceneTex);gl.uniform1i(u2.scene,0);
+  gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,textTex);gl.uniform1i(u2.text,1);
+  gl.uniform2f(u2.res,W,H);gl.uniform1f(u2.t,t);gl.uniform1f(u2.on,showText?1:0);
+  gl.drawArrays(gl.TRIANGLES,0,3);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script>
+</body></html>
