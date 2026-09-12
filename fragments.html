@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050403">
-<title>Everyday Fragments — Lucha Rosa</title>
+<title>Everyday Fragments — Canal Coffee</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;600&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
 <style>
@@ -17,9 +17,9 @@ canvas#txt{display:none}
 <script>
 // ---------- config (URL overrides: ?brand=&tag=&meta=&seed=&speed=&text=0) ----------
 const q=new URLSearchParams(location.search);
-const BRAND=q.get('brand')||'LUCHA ROSA';
-const TAG=q.get('tag')||'Mexican coffee, roasted in Amsterdam.';
-const META=q.get('meta')||'EVERYDAY FRAGMENTS · N°01 · AMS';
+const BRAND=q.get('brand')||'CANAL COFFEE';
+const TAG=q.get('tag')||'';
+const META=q.get('meta')||'';
 const SEED=+(q.get('seed')||7);
 const SPEED=+(q.get('speed')||1);
 let showText=q.get('text')!=='0';
@@ -137,6 +137,8 @@ void main(){
   col=mix(col,bl,0.42);
   col+=max(bl-0.22,0.)*0.75;
   // the type, fringed the same way
+  float halo=texture(uText,uv).g;
+  col*=1.-0.6*halo*uTextOn;
   vec3 tx=vec3(texture(uText,uv+ca*0.35).r,texture(uText,uv).r,texture(uText,uv-ca*0.35).r);
   col+=tx*uTextOn*vec3(0.94,0.92,0.88);
   // tone: gentle roll-off, a touch of desaturation, warm
@@ -181,18 +183,18 @@ let panes=[];
 function layout(asp){
   seedRnd(SEED);
   const land=asp>1.1;
-  const groupW=Math.min(asp*0.86,1.25);
+  const groupW=Math.min(asp*0.94,1.75);
   const cols=land?4:3;
-  const pitch=groupW/cols,colW=pitch*0.80;
-  const yTop=land?0.20:0.14,yBot=land?-0.44:-0.46,span=yTop-yBot;
-  const x0=-groupW/2+(land?0.05:0)+pitch/2;
+  const pitch=groupW/cols,colW=pitch*0.84;
+  const yTop=land?0.42:0.44,yBot=land?-0.47:-0.48,span=yTop-yBot;
+  const x0=-groupW/2+pitch/2;
   panes=[];
   for(let c=0;c<cols;c++){
-    let y=yTop-rnd()*0.10*span/0.64;
+    let y=yTop-rnd()*0.08*span/0.64;
     let first=true;
     while(y>yBot+0.10&&panes.length<16){
-      const h=(0.14+rnd()*0.20)*span/0.64;
-      const skip=!first&&rnd()<0.22;
+      const h=(0.16+rnd()*0.22)*span/0.64;
+      const skip=!first&&rnd()<0.16;
       if(!skip)panes.push([x0+c*pitch+(rnd()-.5)*0.02,y-h/2,colW/2*(0.72+rnd()*0.28),h/2]);
       y-=h+0.03+rnd()*0.06;first=false;
     }
@@ -211,19 +213,19 @@ function drawText(){
   const dpr=W/innerWidth,land=W/H>1.1;
   const vw=W/100;
   ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='left';
-  const cx=W/2,cy=H*(land?0.24:0.21);
-  const metaS=Math.min(12.5*dpr,vw*2.8);
-  ctx.font=`400 ${metaS}px Archivo, system-ui, sans-serif`;
-  ctx.globalAlpha=0.55;spaced(ctx,META,cx,cy-(land?H*0.10:H*0.075),metaS*0.32,W*0.86);
-  const brandS=land?Math.min(vw*6.2,86*dpr):vw*8.6;
-  ctx.font=`300 ${brandS}px Archivo, system-ui, sans-serif`;
-  ctx.globalAlpha=1;spaced(ctx,BRAND,cx,cy,brandS*0.42,W*0.86);
-  const tagS=land?Math.min(vw*2.1,28*dpr):vw*4.6;
-  ctx.font=`italic 300 ${tagS}px "Cormorant Garamond", Georgia, serif`;
-  ctx.globalAlpha=0.85;spaced(ctx,TAG,cx,cy+(land?H*0.095:H*0.072),tagS*0.04,W*0.86);
+  const cx=W/2,cy=H*(land?0.22:0.2);
+  const brandS=land?Math.min(vw*6.6,96*dpr):vw*9.2;
+  const brandF=`300 ${brandS}px Archivo, system-ui, sans-serif`;
+  // green channel: a soft dark halo the shader multiplies in behind the letters
+  ctx.font=brandF;ctx.fillStyle='rgb(0,255,0)';ctx.shadowColor='rgb(0,255,0)';ctx.shadowBlur=brandS*1.1;ctx.globalAlpha=0.8;
+  spaced(ctx,BRAND,cx,cy,brandS*0.42,W*0.88);spaced(ctx,BRAND,cx,cy,brandS*0.42,W*0.88);
+  ctx.shadowBlur=0;ctx.globalAlpha=1;ctx.fillStyle='#fff';ctx.font=brandF;
+  spaced(ctx,BRAND,cx,cy,brandS*0.42,W*0.88);
+  if(META){const metaS=Math.min(12.5*dpr,vw*2.8);ctx.font=`400 ${metaS}px Archivo, system-ui, sans-serif`;ctx.globalAlpha=0.55;spaced(ctx,META,cx,cy-(land?H*0.10:H*0.075),metaS*0.32,W*0.86);}
+  if(TAG){const tagS=land?Math.min(vw*2.1,28*dpr):vw*4.6;ctx.font=`italic 300 ${tagS}px "Cormorant Garamond", Georgia, serif`;ctx.globalAlpha=0.85;spaced(ctx,TAG,cx,cy+(land?H*0.095:H*0.072),tagS*0.04,W*0.86);}
   ctx.globalAlpha=1;
-  gl.bindTexture(gl.TEXTURE_2D,textTex);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);
-  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,tcv);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);
+  gl.bindTexture(gl.TEXTURE_2D,textTex);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,true);
+  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,tcv);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,false);
 }
 document.fonts&&document.fonts.ready.then(()=>{if(W)drawText();});
 
