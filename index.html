@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
 <meta name="theme-color" content="#ff2a8a">
-<title>NOPAL — lookbook</title>
+<title>Lucha Rosa — lookbook</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;800&family=Alfa+Slab+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;800&family=Alfa+Slab+One&family=Syne:wght@400;800&family=Fredoka:wght@600&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=Space+Mono:wght@400;700&family=Silkscreen&display=swap" rel="stylesheet">
 <style>
 :root{
   --pink:#ff2a8a; --pink-d:#d9146c; --orange:#ff9a3c; --orange-l:#ffc27a; --cream:#fff4e6; --white:#fff; --ink:#1a0b12;
@@ -43,7 +43,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 #c1{background:var(--pink);justify-content:center;align-items:flex-start}
 #c1 .sun{position:absolute;right:-28vw;top:8vh;width:90vw;height:90vw;border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--orange-l),var(--orange) 55%,var(--pink-d) 100%);animation:breathe 9s ease-in-out infinite;opacity:.95}
 @keyframes breathe{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.08) rotate(12deg)}}
-#c1 .h{font-size:min(22vw,110px);position:relative;text-shadow:.06em .06em 0 var(--orange),.12em .12em 0 var(--pink-d)}
+#c1 .h{font-size:min(24vw,120px);position:relative;text-shadow:.06em .06em 0 var(--orange),.12em .12em 0 var(--pink-d)}
 #c1 .tag{font-size:clamp(18px,5.4vw,26px);font-weight:800;margin-top:22px;max-width:16ch;line-height:1.15;position:relative}
 
 /* 2 direction A */
@@ -63,7 +63,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 #c3 .picado span{width:38px;height:56px;clip-path:polygon(0 0,100% 0,100% 70%,50% 100%,0 70%);animation:flag 3s ease-in-out infinite;box-shadow:0 4px 10px rgba(0,0,0,.2)}
 #c3 .picado span:nth-child(odd){animation-delay:-1.5s}
 @keyframes flag{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(4deg) translateY(4px)}}
-#c3 .slab{font-family:var(--slab);font-size:min(21vw,100px);line-height:.9;color:var(--pink);text-shadow:.05em .05em 0 var(--orange);position:relative}
+#c3 .slab{font-family:var(--slab);font-size:min(22vw,104px);line-height:.9;color:var(--pink);text-shadow:.05em .05em 0 var(--orange);position:relative}
 #c3 .es{font-family:var(--slab);font-size:clamp(16px,4.8vw,22px);color:var(--ink);margin:10px 0 16px;position:relative}
 #c3 .dirlabel,#c3 .dirsub,#c3 .chips{position:relative}
 
@@ -71,7 +71,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 #c4{background:#0d080c;justify-content:flex-end}
 #c4 canvas{position:absolute;inset:-6%;width:112%;height:112%;filter:blur(26px) saturate(1.2)}
 #c4 .veil{position:absolute;inset:0;background:rgba(8,6,12,.34)}
-#c4 .h{font-size:min(21vw,105px);position:relative;text-shadow:5px 5px 0 var(--pink),10px 10px 0 var(--orange)}
+#c4 .h{font-size:min(22vw,110px);position:relative;text-shadow:5px 5px 0 var(--pink),10px 10px 0 var(--orange)}
 #c4 .mono{font-size:12px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;opacity:.85;margin:16px 0 18px;position:relative}
 #c4 .dirlabel,#c4 .dirsub,#c4 .chips{position:relative}
 
@@ -213,9 +213,135 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .tier .r{display:flex;gap:10px;font-weight:800;font-size:clamp(13px,3.8vw,16px);flex-wrap:wrap}
 .tier .r span small{display:block;font-size:10px;font-weight:700;opacity:.7;letter-spacing:.1em;text-transform:uppercase}
 #c11 .end{margin-top:14px;text-align:center}
-#c11 .end .logo{font-size:44px;color:#fff;text-shadow:.06em .06em 0 var(--pink),.12em .12em 0 var(--orange)}
+#c11 .end .logo{font-size:34px;color:#fff;text-shadow:.06em .06em 0 var(--pink),.12em .12em 0 var(--orange)}
 #c11 .end p{font-weight:800;font-size:14px;margin-top:10px;opacity:.85}
 #c11 .end small{display:block;font-size:10px;opacity:.5;margin-top:12px;font-weight:600;line-height:1.4}
+
+
+/* 9 ads, two columns */
+#c9 .cols{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:10px;min-height:0;margin:8px 0 10px}
+.col{display:flex;flex-direction:column;justify-content:space-evenly;border-radius:18px;padding:10px 12px;min-height:0}
+.col.naive{background:rgba(0,0,0,.09)}
+.col.proper{background:#fff}
+.col h3{font-family:var(--disp);font-size:12px;letter-spacing:.14em;text-transform:uppercase;line-height:1.1}
+.col h3 small{display:block;font-family:var(--body);font-size:10px;letter-spacing:.02em;text-transform:none;opacity:.7;font-weight:700;margin-top:2px}
+.col.proper h3{color:var(--pink)}
+.row2{transform:translateY(16px);opacity:0;transition:transform .5s cubic-bezier(.3,1.4,.5,1),opacity .3s}
+.row2.in{transform:none;opacity:1}
+.row2 b{display:block;font-family:var(--disp);font-size:clamp(20px,6.6vw,30px);line-height:1;white-space:nowrap}
+.row2 span{display:block;font-size:11px;font-weight:700;opacity:.75;line-height:1.2;margin-top:2px}
+.row2.bad b{color:var(--pink-d)}
+.col.proper .row2.good b{color:var(--pink)}
+.col.proper .row2.win b{color:#0a8f5b}
+#c9 .adtile{margin:6px 0 0;transform:rotate(-1.5deg)}
+#c9 .flip{margin-top:0;padding:12px 14px;font-size:clamp(13px,3.8vw,16px)}
+
+/* 12 divider */
+#c12{background:#0d080c;justify-content:center;align-items:center;text-align:center}
+#c12 .h{font-size:clamp(44px,14vw,70px)}
+#c12 p{font-weight:600;opacity:.7;margin-top:16px;max-width:24ch;line-height:1.4}
+#c12 .arrow{font-size:64px;margin-top:28px;animation:nudge 1.4s ease-in-out infinite;line-height:1}
+
+/* 13 vórtice */
+#c13{background:#000;justify-content:space-between;font-family:'Syne',var(--body)}
+#c13 canvas{position:absolute;inset:0;width:100%;height:100%}
+#c13 .top{position:relative;font-size:11px;letter-spacing:.5em;text-transform:uppercase;opacity:.75}
+#c13 .name{position:relative;font-weight:800;font-size:clamp(40px,12.5vw,62px);letter-spacing:-.03em;line-height:.9;text-transform:uppercase;text-shadow:0 0 40px rgba(180,80,255,.6)}
+#c13 .name i{font-style:normal;display:block;font-weight:400;font-size:.32em;letter-spacing:.34em;margin-top:12px;opacity:.9}
+#c13 .tag{position:relative;font-size:14px;opacity:.8;max-width:24ch;margin-top:14px;line-height:1.4}
+#c13 .ring{position:absolute;left:50%;top:50%;width:62vw;height:62vw;max-width:300px;max-height:300px;border:1px solid rgba(255,255,255,.35);border-radius:50%;transform:translate(-50%,-50%);animation:ring 12s linear infinite}
+#c13 .ring::after{content:"";position:absolute;top:-4px;left:50%;width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 14px #fff}
+@keyframes ring{to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+/* 14 oye */
+#c14{background:var(--marigold);color:var(--ink);justify-content:flex-end;font-family:'Fredoka',var(--body)}
+#c14 .name{font-weight:600;font-size:clamp(84px,28vw,140px);line-height:.85;position:absolute;top:calc(60px + env(safe-area-inset-top,0px));left:14px;letter-spacing:-.03em;transform:rotate(-7deg);transform-origin:left top;animation:wig 2.4s ease-in-out infinite}
+@keyframes wig{50%{transform:rotate(-4deg) translateY(-6px)}}
+.bubbles{display:flex;flex-direction:column;gap:9px;margin-bottom:14px}
+.bub{align-self:flex-start;background:#fff;border-radius:22px 22px 22px 6px;padding:11px 16px;font-weight:600;font-size:clamp(16px,4.7vw,20px);max-width:80%;transform:scale(.2);opacity:0;transform-origin:left bottom;transition:transform .5s cubic-bezier(.3,1.7,.5,1),opacity .2s;box-shadow:0 8px 20px rgba(0,0,0,.12)}
+.bub.me{align-self:flex-end;background:var(--ink);color:#fff;border-radius:22px 22px 6px 22px;transform-origin:right bottom}
+.bub.in{transform:none;opacity:1}
+#c14 .tag{font-weight:600;font-size:14px;opacity:.7}
+
+/* 15 tacaná */
+#c15{background:#f6f4ee;color:#181818;justify-content:space-between;align-items:center;text-align:center;font-family:'Cormorant Garamond',serif}
+#c15 .mono{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;opacity:.55}
+#c15 .mid{display:flex;flex-direction:column;align-items:center;gap:26px}
+#c15 .name{font-weight:300;font-size:clamp(46px,14vw,70px);letter-spacing:.06em;line-height:1}
+#c15 .hair{width:120px;height:1px;background:#181818;opacity:.5;transform:scaleX(0);transition:transform 1.4s cubic-bezier(.2,.8,.2,1)}
+#c15.vis .hair{transform:none}
+#c15 .dot{width:9px;height:9px;border-radius:50%;background:#181818;animation:dotb 5s ease-in-out infinite}
+@keyframes dotb{50%{transform:scale(1.6);opacity:.5}}
+#c15 .ital{font-style:italic;font-weight:300;font-size:clamp(18px,5.4vw,24px);opacity:.85;max-width:20ch;line-height:1.3}
+
+/* 16 ruido */
+#c16{background:#0e0b12;justify-content:space-between;overflow:hidden}
+#c16 canvas{position:absolute;inset:-6%;width:112%;height:112%;filter:blur(22px) saturate(1.25)}
+#c16 .veil{position:absolute;inset:0;background:rgba(6,4,10,.28)}
+#c16 .name{position:relative;font-family:var(--disp);font-size:clamp(84px,30vw,150px);line-height:.8;text-transform:uppercase;letter-spacing:-.04em;transform:rotate(-5deg);transform-origin:left top;margin-top:10px;text-shadow:6px 6px 0 oklch(62% 0.26 350),12px 12px 0 oklch(75% 0.15 200)}
+#c16 .stars{position:relative;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.1em;opacity:.9;margin-top:14px}
+.marq{position:relative;overflow:hidden;white-space:nowrap;border-top:2px solid #fff;border-bottom:2px solid #fff;padding:8px 0;margin:0 -22px}
+.marq span{display:inline-block;font-family:var(--disp);font-size:22px;text-transform:uppercase;letter-spacing:.06em;animation:marq 9s linear infinite;padding-right:1em}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* 17 madrugada */
+#c17{background:#1a0a10;justify-content:space-between;font-family:'Cormorant Garamond',serif}
+#c17 .photo{position:absolute;inset:0;background:url(img/hero-farm.webp) center/cover;animation:kb 26s ease-in-out infinite alternate;transform-origin:40% 60%}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.14)}}
+#c17 .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,6,12,.85) 0,rgba(20,6,12,.25) 45%,transparent 70%)}
+#c17 .top{position:relative;font-family:var(--body);font-size:11px;letter-spacing:.5em;text-transform:uppercase;opacity:.9}
+#c17 .big{position:relative;font-style:italic;font-weight:300;font-size:clamp(40px,12.5vw,62px);line-height:1;max-width:9ch}
+#c17 .small{position:relative;font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;opacity:.8;margin-top:14px}
+
+/* 18 ticket */
+#c18{background:#dedbd3;color:#111;font-family:'Space Mono',monospace;justify-content:center;align-items:center}
+.paper{background:#fff;width:min(86vw,340px);padding:22px 20px 34px;box-shadow:0 20px 40px rgba(0,0,0,.18);clip-path:polygon(0 0,100% 0,100% calc(100% - 10px),97% 100%,94% calc(100% - 10px),91% 100%,88% calc(100% - 10px),85% 100%,82% calc(100% - 10px),79% 100%,76% calc(100% - 10px),73% 100%,70% calc(100% - 10px),67% 100%,64% calc(100% - 10px),61% 100%,58% calc(100% - 10px),55% 100%,52% calc(100% - 10px),49% 100%,46% calc(100% - 10px),43% 100%,40% calc(100% - 10px),37% 100%,34% calc(100% - 10px),31% 100%,28% calc(100% - 10px),25% 100%,22% calc(100% - 10px),19% 100%,16% calc(100% - 10px),13% 100%,10% calc(100% - 10px),7% 100%,4% calc(100% - 10px),1% 100%,0 calc(100% - 10px));transform:rotate(-1.5deg)}
+.paper .ln{font-size:12px;line-height:1.75;white-space:pre;opacity:0;transform:translateY(4px);transition:opacity .15s,transform .15s}
+.paper .ln.in{opacity:1;transform:none}
+.paper .ln.hd{font-weight:700;font-size:20px;line-height:1.2;letter-spacing:.06em}
+.paper .ln.dim{opacity:0}.paper .ln.dim.in{opacity:.5}
+.paper .bar{height:38px;margin-top:12px;background:repeating-linear-gradient(90deg,#111 0 2px,transparent 2px 4px,#111 4px 5px,transparent 5px 8px,#111 8px 11px,transparent 11px 13px);opacity:0;transition:opacity .3s}
+.paper .bar.in{opacity:1}
+
+/* 19 sobremesa */
+#c19{background:var(--orange);color:var(--ink);justify-content:flex-end;padding-left:0;padding-right:0;padding-bottom:0}
+#c19 .photo{position:absolute;inset:0;background:url(img/cup.webp) center 30%/cover}
+#c19 .panel{position:relative;background:var(--cream);border-radius:30px 30px 0 0;padding:26px 24px calc(30px + env(safe-area-inset-bottom,0px));transform:translateY(40%);transition:transform .8s cubic-bezier(.2,.9,.2,1)}
+#c19.vis .panel{transform:none}
+#c19 .name{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:clamp(50px,15vw,74px);line-height:.9;color:var(--pink-d)}
+#c19 .tag{font-weight:600;font-size:15px;line-height:1.35;margin:12px 0 16px;max-width:30ch}
+#c19 .pills{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+#c19 .pills span{background:#fff;border:2px solid var(--orange);border-radius:99px;padding:7px 12px;font-size:12px;font-weight:800}
+
+/* 20 close */
+#c20{background:#0d080c;justify-content:center}
+#c20 .h{font-size:clamp(34px,10.5vw,52px);margin-bottom:22px}
+.menu{display:flex;flex-direction:column;gap:9px}
+.menu div{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.14);padding-bottom:7px;transform:translateX(-20px);opacity:0;transition:transform .5s cubic-bezier(.2,.9,.3,1),opacity .3s}
+.menu div.in{transform:none;opacity:1}
+.menu div small{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.55}
+.menu .m1{font-family:var(--disp);color:var(--pink);font-size:22px}
+.menu .m2{font-family:'Syne';font-weight:800;font-size:22px;letter-spacing:-.02em}
+.menu .m3{font-family:'Fredoka';font-weight:600;font-size:24px;color:var(--marigold)}
+.menu .m4{font-family:'Cormorant Garamond';font-weight:300;font-size:26px;letter-spacing:.08em}
+.menu .m5{font-family:var(--disp);font-size:22px;text-shadow:3px 3px 0 oklch(62% 0.26 350)}
+.menu .m6{font-family:'Cormorant Garamond';font-style:italic;font-size:26px}
+.menu .m7{font-family:'Space Mono';font-weight:700;font-size:18px}
+.menu .m8{font-family:'Cormorant Garamond';font-style:italic;font-weight:500;font-size:26px;color:var(--orange)}
+#c20 p{margin-top:22px;font-weight:600;opacity:.7;font-size:14px;line-height:1.4}
+
+/* 21 ruta, 16-bit truck */
+#c21{background:#fff;color:#111;justify-content:center;align-items:center}
+#c21 .brand{font-family:'Silkscreen',monospace;font-size:clamp(40px,13vw,64px);color:#111;line-height:1;text-align:center;opacity:0;text-shadow:4px 4px 0 var(--pink)}
+#c21 .brand.flick{animation:flick 1.6s steps(1) forwards}
+@keyframes flick{0%{opacity:0}8%{opacity:1}12%{opacity:0}20%{opacity:1}24%{opacity:0}26%{opacity:1}34%{opacity:0}44%{opacity:1}48%{opacity:0}50%{opacity:1}62%{opacity:0}66%{opacity:1}100%{opacity:1}}
+#c21 .scene{position:relative;width:100%;aspect-ratio:4/3;margin:18px 0 6px;image-rendering:pixelated}
+#c21 .scene img,#c21 .scene canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
+#c21 .rig{position:absolute;inset:0;animation:rattle .16s steps(1) infinite}
+@keyframes rattle{0%{transform:translate(0,0)}25%{transform:translate(0,-1px)}50%{transform:translate(1px,0)}75%{transform:translate(0,1px)}}
+#c21 .tag{font-family:'Silkscreen',monospace;font-size:11px;color:#666;text-align:center;line-height:1.8}
+#c21 .tag b{color:var(--pink)}
+.menu .m9{font-family:'Silkscreen';font-size:16px;color:#fff;text-shadow:2px 2px 0 var(--pink)}
 
 .card:not(.vis) *{animation-play-state:paused!important}
 @media (min-width:700px){
@@ -229,13 +355,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 </head>
 <body>
 <div id="prog"></div>
-<div id="num">1 / 11</div>
+<div id="num">1 / 21</div>
 <main id="deck">
 
 <section class="card" id="c1">
   <div class="sun"></div>
   <div class="eyebrow" style="position:relative;margin-bottom:18px">A lookbook · September 2026</div>
-  <h1 class="h">Nopal</h1>
+  <h1 class="h">Lucha<br>Rosa</h1>
   <p class="tag">Mexican coffee, roasted in Amsterdam.</p>
   <div class="hint">swipe →</div>
 </section>
@@ -252,7 +378,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 <section class="card" id="c3">
   <div class="photo"></div>
   <div class="picado"><span style="background:var(--pink)"></span><span style="background:var(--orange)"></span><span style="background:var(--turq)"></span><span style="background:var(--marigold)"></span><span style="background:var(--pink)"></span><span style="background:var(--orange)"></span><span style="background:var(--turq)"></span></div>
-  <div class="slab">Nopal</div>
+  <div class="slab">Lucha<br>Rosa</div>
   <div class="es">Café de Chiapas, tostado en Ámsterdam.</div>
   <div class="dirlabel"><span class="n">B</span><span class="t">Fiesta</span></div>
   <p class="dirsub">Papel picado, slab type, four colours instead of three. The investor's story on the bag.</p>
@@ -261,7 +387,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 
 <section class="card" id="c4">
   <canvas id="paint"></canvas><div class="veil"></div>
-  <div class="h">Nopal</div>
+  <div class="h">Lucha<br>Rosa</div>
   <div class="mono">Small batch · Chiapas · roasted Tuesday</div>
   <div class="dirlabel"><span class="n">C</span><span class="t">After dark</span></div>
   <p class="dirsub">Same pink and orange, now as living paint under black glass. The site background never stops moving.</p>
@@ -269,7 +395,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 </section>
 
 <section class="card" id="c5">
-  <div class="topbar"><span class="logo">NOPAL</span><button class="cart" id="cart">🛒<b id="cartn">0</b></button></div>
+  <div class="topbar"><span class="logo">LUCHA ROSA</span><button class="cart" id="cart">🛒<b id="cartn">0</b></button></div>
   <div class="pills"><button class="pill on">All</button><button class="pill">Espresso</button><button class="pill">Filter</button><button class="pill">Subscribe</button></div>
   <div class="grid">
     <div class="prod"><img src="img/bag-pink.webp" alt=""><div class="nm">Alba</div><div class="nt">milk chocolate · orange · caramel</div><div class="row"><span class="pr">€13.50</span><button class="add" data-add>+</button></div></div>
@@ -280,7 +406,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 </section>
 
 <section class="card" id="c6">
-  <div class="topbar"><span class="logo">NOPAL</span><span style="font-size:11px;font-weight:800;letter-spacing:.2em;opacity:.6">← BACK</span></div>
+  <div class="topbar"><span class="logo">LUCHA ROSA</span><span style="font-size:11px;font-weight:800;letter-spacing:.2em;opacity:.6">← BACK</span></div>
   <div class="stage"><img class="bag tap" src="img/bag-pink.webp" alt=""><div class="shadow"></div></div>
   <div class="nm">Alba</div>
   <div class="origin">Finca El Triunfo · 1,600 m · washed · roasted to order</div>
@@ -334,14 +460,27 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 </section>
 
 <section class="card" id="c9">
-  <div class="eyebrow">One ad, honestly</div>
-  <div class="adtile"><img src="img/bag-pink.webp" alt=""><div><span class="sp">Sponsored</span><b>NOPAL Alba 250 g</b><span>€13.50 · free shipping over €25 · nopal.coffee</span></div></div>
-  <div class="stats"><div class="stat"><b>€0.70</b><span>per click on Google Shopping</span></div>
-  <div class="stat"><b>1 in 50</b><span>clicks turns into an order</span></div>
-  <div class="stat"><b>€35</b><span>to win one new customer</span></div>
-  <div class="stat bad"><b>−€19</b><span>on their first order of two bags</span></div>
-  <div class="stat good"><b>€127</b><span>margin from that same customer on a subscription, eight months</span></div></div>
-  <div class="flip">The ad loses money on order one. <em>The subscription is the business.</em> That's the whole game in online coffee.</div>
+  <div class="eyebrow">Same coffee. Same Google.</div>
+  <div class="adtile"><img src="img/bag-pink.webp" alt=""><div><span class="sp">Sponsored</span><b>LUCHA ROSA Alba 250 g</b><span>€13.50 · free shipping over €25 · lucharosa.coffee</span></div></div>
+  <div class="cols">
+    <div class="col naive" id="colA">
+      <h3>Naive<small>nice site, nobody on the numbers</small></h3>
+      <div class="row2"><b>€0.70</b><span>per click</span></div>
+      <div class="row2"><b>1 in 50</b><span>clicks buys</span></div>
+      <div class="row2"><b>€35</b><span>per new customer</span></div>
+      <div class="row2 bad"><b>−€19</b><span>first order, 2 bags</span></div>
+      <div class="row2 good"><b>€127</b><span>subscriber, 8 months · 3.6×</span></div>
+    </div>
+    <div class="col proper" id="colB">
+      <h3>Proper<small>tested, tuned, automated</small></h3>
+      <div class="row2"><b>€0.55</b><span>per click · better ads</span></div>
+      <div class="row2"><b>1 in 25</b><span>clicks buys · better page</span></div>
+      <div class="row2"><b>€14</b><span>per new customer</span></div>
+      <div class="row2 win"><b>+€6</b><span>first order, trio €36</span></div>
+      <div class="row2 good"><b>€190</b><span>subscriber, 12 months · 13×</span></div>
+    </div>
+  </div>
+  <div class="flip">Same benchmarks, both columns. <em>The difference is who runs the back end.</em></div>
 </section>
 
 <section class="card" id="c10">
@@ -371,9 +510,123 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
   <div class="tiers">
     <div class="tier"><div class="n" data-count="200">0</div><div class="l">subscribers · a good first year</div><div class="r"><span>100 kg<small>roasted / mo</small></span><span>€5,400<small>revenue / mo</small></span><span>€3,170<small>margin / mo</small></span></div></div>
     <div class="tier"><div class="n" data-count="500">0</div><div class="l">subscribers · one salary</div><div class="r"><span>250 kg<small>roasted / mo</small></span><span>€13,500<small>revenue / mo</small></span><span>€7,930<small>margin / mo</small></span></div></div>
-    <div class="tier"><div class="n" data-count="1000">0</div><div class="l">subscribers · a real company</div><div class="r"><span>500 kg<small>roasted / mo</small></span><span>€27,000<small>revenue / mo</small></span><span>€15,860<small>margin / mo</small></span></div></div>
+    <div class="tier"><div class="n" data-count="1000">0</div><div class="l">a real company · roasting falls to €0.30/bag</div><div class="r"><span>500 kg<small>roasted / mo</small></span><span>€27,000<small>revenue / mo</small></span><span>€15,860<small>margin / mo</small></span></div></div>
   </div>
-  <div class="end"><div class="logo">NOPAL</div><p>Made in one afternoon. Imagine a year.</p><small>Every number here is a public benchmark, not a promise. Before wholesale, café, or gear.</small></div>
+  <div class="end"><div class="logo">LUCHA ROSA</div><p>Made in one afternoon. Imagine a year.</p><small>Every number here is a public benchmark, not a promise. Before wholesale, café, or gear.</small></div>
+</section>
+
+<section class="card" id="c12">
+  <div class="h">Keep<br>swiping.</div>
+  <p>Seven more brands. None of them real. Each one was an hour.</p>
+  <div class="arrow">→</div>
+</section>
+
+<section class="card" id="c13">
+  <canvas id="vortex"></canvas>
+  <div class="ring"></div>
+  <div class="top">Nightshift roasters · AMS-N</div>
+  <div>
+    <div class="name">Vórtice<i>espresso after dark</i></div>
+    <p class="tag">Coffee for the hours nobody admits to. Roasted at midnight, delivered before you're up.</p>
+  </div>
+</section>
+
+<section class="card" id="c14">
+  <div class="name">OYE</div>
+  <div class="bubbles" id="bubbles">
+    <div class="bub">oye 👋</div>
+    <div class="bub">you up?</div>
+    <div class="bub">friday's roast just dropped</div>
+    <div class="bub">mango · brown sugar · a little wild</div>
+    <div class="bub me">ok fine 🛒</div>
+    <div class="bub">roasting it now 🔥 see you tuesday</div>
+  </div>
+  <div class="tag">OYE · the coffee that texts you back</div>
+</section>
+
+<section class="card" id="c15">
+  <div class="mono">15.1319° N · 92.1091° W</div>
+  <div class="mid">
+    <div class="name">Tacaná</div>
+    <div class="hair"></div>
+    <div class="mono">4,092 M · CHIAPAS · LOTE 07</div>
+    <div class="dot"></div>
+  </div>
+  <div class="ital">Roasted on Tuesdays.<br>Gone by Thursday.</div>
+</section>
+
+<section class="card" id="c16">
+  <canvas id="paint2"></canvas><div class="veil"></div>
+  <div class="name">Rui<br>do</div>
+  <div>
+    <div class="stars">★★★★★ "too much" — a customer</div>
+    <div class="marq"><span>Ruido · loud coffee · no notes · Ruido · loud coffee · no notes · Ruido · loud coffee · no notes · Ruido · loud coffee · no notes ·</span></div>
+  </div>
+</section>
+
+<section class="card" id="c17">
+  <div class="photo"></div>
+  <div class="top">Madrugada</div>
+  <div>
+    <div class="big">Picked at first light.</div>
+    <div class="small">Chiapas · 05:40 · lot 4</div>
+  </div>
+</section>
+
+<section class="card" id="c18">
+  <div class="paper" id="paper">
+    <div class="ln hd">TICKET</div>
+    <div class="ln dim">COFFEE CO. · AMSTERDAM-NOORD</div>
+    <div class="ln">------------------------</div>
+    <div class="ln">LOT       CHIAPAS 07</div>
+    <div class="ln">PICKED    14 FEB  06:10</div>
+    <div class="ln">LANDED    02 MAY  ROTTERDAM</div>
+    <div class="ln">ROASTED   TUE     08:12</div>
+    <div class="ln">BAGGED    TUE     09:40</div>
+    <div class="ln">SHIPPED   TUE     16:05</div>
+    <div class="ln">------------------------</div>
+    <div class="ln">YOUR BAG  250G     13.50</div>
+    <div class="ln">FARMER'S SHARE      3.10</div>
+    <div class="ln">BTW 9%              1.11</div>
+    <div class="ln">------------------------</div>
+    <div class="ln hd" style="font-size:14px">NOTHING HIDDEN. EVER.</div>
+    <div class="bar"></div>
+  </div>
+</section>
+
+<section class="card" id="c19">
+  <div class="photo"></div>
+  <div class="panel">
+    <div class="name">sobremesa</div>
+    <p class="tag">The coffee after the meal after the meal. For tables that don't clear until midnight.</p>
+    <div class="pills"><span>decaf that's actually good</span><span>sunday delivery</span><span>bag feeds a table</span></div>
+  </div>
+</section>
+
+<section class="card" id="c21">
+  <div class="brand" id="rutaName">RUTA</div>
+  <div class="scene">
+    <canvas id="ground"></canvas>
+    <div class="rig"><img id="truckImg" src="img/truck.png" alt=""><canvas id="wheels"></canvas></div>
+  </div>
+  <div class="tag">FARM TO DOOR · BADLY PAVED<br>16-BIT · <b>RUMBLING SINCE 2026</b></div>
+</section>
+
+<section class="card" id="c20">
+  <div class="eyebrow">Nine worlds, one afternoon</div>
+  <div class="h">Pick a mood.</div>
+  <div class="menu" id="menu">
+    <div><span class="m1">LUCHA ROSA</span><small>loud &amp; sweet</small></div>
+    <div><span class="m2">VÓRTICE</span><small>after dark</small></div>
+    <div><span class="m3">OYE</span><small>texts you back</small></div>
+    <div><span class="m4">Tacaná</span><small>gallery quiet</small></div>
+    <div><span class="m5">RUIDO</span><small>too much</small></div>
+    <div><span class="m6">Madrugada</span><small>first light</small></div>
+    <div><span class="m7">TICKET</span><small>nothing hidden</small></div>
+    <div><span class="m8">sobremesa</span><small>stays late</small></div>
+    <div><span class="m9">RUTA</span><small>16-bit, badly paved</small></div>
+  </div>
+  <p>Or none of these. The next one takes an hour.</p>
 </section>
 
 </main>
@@ -400,27 +653,87 @@ const dots=done.querySelector('.dots');for(let i=0;i<26;i++){const d=document.cr
 document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>{steps[s].classList.remove('on');steps[s].classList.add('gone');s++;steps[s].classList.add('on')}));
 document.querySelectorAll('[data-done]').forEach(b=>b.addEventListener('click',()=>{steps[s].classList.remove('on');steps[s].classList.add('gone');done.classList.add('on')}));
 document.querySelector('[data-reset]').addEventListener('click',()=>{done.classList.remove('on');steps.forEach(x=>x.classList.remove('on','gone'));s=0;steps[0].classList.add('on')});
-const ntfs=[...document.querySelectorAll('.ntf')];let ntfT=[];
-function playNtf(){ntfT.forEach(clearTimeout);ntfs.forEach(x=>x.classList.remove('in'));ntfT=ntfs.map((x,i)=>setTimeout(()=>x.classList.add('in'),500+i*850))}
+const ntfs=[...document.querySelectorAll('.ntf')];
 const bar=document.getElementById('bar');
 function count(el){const to=+el.dataset.count,t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/1100),e=1-Math.pow(1-k,3);el.textContent=Math.round(to*e).toLocaleString('en-US');if(k<1)requestAnimationFrame(f)})(t0)}
-let paintOn=false;
-function onEnter(i){
-  if(i===7)playNtf();
-  if(i===9){bar.classList.remove('in');void bar.offsetWidth;bar.classList.add('in')}
-  if(i===10)document.querySelectorAll('[data-count]').forEach(count);
-  paintOn=(i===3);
-}
-/* living paint, from the portfolio site background, hues moved to pink and orange */
-const cv=document.getElementById('paint'),ctx=cv.getContext('2d');
+/* living paint (from the portfolio site background), generic so two cards can use it with different hues */
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
-const HUES=[350,25,45,335,15,60],C=0.27,Lmin=50,Lmax=68,NS=11,LIFE_MIN=40,LIFE_VAR=45,FADE=8;
-const rnd=mulberry32(Date.now()%2147483647);let strokes=[];
-function mk(w,h,birth){const len=(0.12+rnd()*0.24)*Math.max(w,h),ang=rnd()*6.283,x0=rnd()*w,y0=rnd()*h;return{hue:HUES[(rnd()*HUES.length)|0],L:Lmin+rnd()*(Lmax-Lmin),x0,y0,ang,len,mx:x0+Math.cos(ang)*len/2+(rnd()-.5)*len*.5,my:y0+Math.sin(ang)*len/2+(rnd()-.5)*len*.5,width:(90+rnd()*120),birth,life:LIFE_MIN+rnd()*LIFE_VAR,ph:rnd()*6.283,ph2:rnd()*6.283,ph3:rnd()*6.283,sp:.05+rnd()*.06,amp:60+rnd()*100,bow:80+rnd()*120,angAmp:.12+rnd()*.18}}
-function sizePaint(){const w=cards[3].clientWidth,h=cards[3].clientHeight;cv.width=Math.round(w*.56);cv.height=Math.round(h*.56);const t=performance.now()/1000;strokes=[];for(let k=0;k<NS;k++){const s=mk(cv.width,cv.height,0);s.birth=t-rnd()*(s.life-FADE*2);strokes.push(s)}}
-function ds(s,t){const x0=s.x0+Math.sin(t*s.sp+s.ph)*s.amp,y0=s.y0+Math.cos(t*s.sp*.83+s.ph2)*s.amp,ang=s.ang+Math.sin(t*s.sp*.6+s.ph3)*s.angAmp,x1=x0+Math.cos(ang)*s.len,y1=y0+Math.sin(ang)*s.len,mx=s.mx+Math.sin(t*s.sp*.71+s.ph2)*s.bow,my=s.my+Math.cos(t*s.sp*.57+s.ph)*s.bow;ctx.lineCap='round';ctx.lineWidth=s.width;ctx.strokeStyle=`oklch(${s.L*.45}% ${C*.8} ${s.hue} / .9)`;ctx.beginPath();ctx.moveTo(x0+4,y0+5);ctx.quadraticCurveTo(mx+4,my+5,x1+4,y1+5);ctx.stroke();ctx.strokeStyle=`oklch(${s.L}% ${C} ${s.hue})`;ctx.beginPath();ctx.moveTo(x0,y0);ctx.quadraticCurveTo(mx,my,x1,y1);ctx.stroke();ctx.strokeStyle=`oklch(${Math.min(92,s.L*1.35)}% ${C*.55} ${s.hue} / .65)`;ctx.lineWidth=Math.max(3,s.width*.12);ctx.beginPath();ctx.moveTo(x0-s.width*.22,y0-s.width*.26);ctx.quadraticCurveTo(mx-s.width*.22,my-s.width*.26,x1-s.width*.22,y1-s.width*.26);ctx.stroke()}
-function frame(ms){requestAnimationFrame(frame);if(!paintOn&&ms>2500)return;const t=ms/1000;ctx.fillStyle='oklch(13% 0.03 340)';ctx.fillRect(0,0,cv.width,cv.height);for(let i=0;i<strokes.length;i++){let s=strokes[i];if(t-s.birth>s.life)s=strokes[i]=mk(cv.width,cv.height,t);const life=t-s.birth;ctx.globalAlpha=Math.max(0,Math.min(1,life/FADE,(s.life-life)/FADE));ds(s,t)}ctx.globalAlpha=1}
-sizePaint();addEventListener('resize',sizePaint);requestAnimationFrame(frame);
+function makePaint(cv,card,HUES,opt){
+  const ctx=cv.getContext('2d'),C=opt.C||0.27,Lmin=opt.Lmin||50,Lmax=opt.Lmax||68,NS=opt.n||11,LIFE_MIN=40,LIFE_VAR=45,FADE=8,bg=opt.bg||'oklch(13% 0.03 340)';
+  const rnd=mulberry32((Date.now()+(opt.seed||0))%2147483647);let strokes=[];
+  function mk(w,h,birth){const len=(0.12+rnd()*0.24)*Math.max(w,h),ang=rnd()*6.283,x0=rnd()*w,y0=rnd()*h;return{hue:HUES[(rnd()*HUES.length)|0],L:Lmin+rnd()*(Lmax-Lmin),x0,y0,ang,len,mx:x0+Math.cos(ang)*len/2+(rnd()-.5)*len*.5,my:y0+Math.sin(ang)*len/2+(rnd()-.5)*len*.5,width:(opt.wMin||90)+rnd()*(opt.wVar||120),birth,life:LIFE_MIN+rnd()*LIFE_VAR,ph:rnd()*6.283,ph2:rnd()*6.283,ph3:rnd()*6.283,sp:(opt.sp||.05)+rnd()*.06,amp:60+rnd()*100,bow:80+rnd()*120,angAmp:.12+rnd()*.18}}
+  function size(){cv.width=Math.round(card.clientWidth*.56);cv.height=Math.round(card.clientHeight*.56);const t=performance.now()/1000;strokes=[];for(let k=0;k<NS;k++){const s=mk(cv.width,cv.height,0);s.birth=t-rnd()*(s.life-FADE*2);strokes.push(s)}}
+  function ds(s,t){const x0=s.x0+Math.sin(t*s.sp+s.ph)*s.amp,y0=s.y0+Math.cos(t*s.sp*.83+s.ph2)*s.amp,ang=s.ang+Math.sin(t*s.sp*.6+s.ph3)*s.angAmp,x1=x0+Math.cos(ang)*s.len,y1=y0+Math.sin(ang)*s.len,mx=s.mx+Math.sin(t*s.sp*.71+s.ph2)*s.bow,my=s.my+Math.cos(t*s.sp*.57+s.ph)*s.bow;ctx.lineCap='round';ctx.lineWidth=s.width;ctx.strokeStyle=`oklch(${s.L*.45}% ${C*.8} ${s.hue} / .9)`;ctx.beginPath();ctx.moveTo(x0+4,y0+5);ctx.quadraticCurveTo(mx+4,my+5,x1+4,y1+5);ctx.stroke();ctx.strokeStyle=`oklch(${s.L}% ${C} ${s.hue})`;ctx.beginPath();ctx.moveTo(x0,y0);ctx.quadraticCurveTo(mx,my,x1,y1);ctx.stroke();ctx.strokeStyle=`oklch(${Math.min(92,s.L*1.35)}% ${C*.55} ${s.hue} / .65)`;ctx.lineWidth=Math.max(3,s.width*.12);ctx.beginPath();ctx.moveTo(x0-s.width*.22,y0-s.width*.26);ctx.quadraticCurveTo(mx-s.width*.22,my-s.width*.26,x1-s.width*.22,y1-s.width*.26);ctx.stroke()}
+  function draw(t){ctx.fillStyle=bg;ctx.fillRect(0,0,cv.width,cv.height);for(let i=0;i<strokes.length;i++){let s=strokes[i];if(t-s.birth>s.life)s=strokes[i]=mk(cv.width,cv.height,t);const life=t-s.birth;ctx.globalAlpha=Math.max(0,Math.min(1,life/FADE,(s.life-life)/FADE));ds(s,t)}ctx.globalAlpha=1}
+  size();addEventListener('resize',size);return{draw};
+}
+const IDX=id=>cards.findIndex(c=>c.id===id);
+const paintA=makePaint(document.getElementById('paint'),cards[IDX('c4')],[350,25,45,335,15,60],{});
+const paintB=makePaint(document.getElementById('paint2'),cards[IDX('c16')],[350,30,75,145,240,305],{seed:9137,C:0.28,Lmin:48,Lmax:66,wMin:120,wVar:160,sp:.08,bg:'oklch(13% 0.03 320)'});
+let paintOn=false,paint2On=false,glOn=false;
+/* vórtice: Xor's purple smoke vortex (fragcoord.xyz/s/3zoe0vgo), expanded in shader-lab, run at 40% res */
+const glCv=document.getElementById('vortex');let gl=null,glProg,glT,glR,glReady=false;
+function glInit(){try{gl=glCv.getContext('webgl2',{antialias:false,alpha:false});if(!gl)return;
+const vs=`#version 300 es
+in vec2 p;void main(){gl_Position=vec4(p,0.,1.);}`;
+const fs=`#version 300 es
+precision highp float;uniform vec2 u_resolution;uniform float u_time;out vec4 fragColor;
+void main(){float T=u_time*0.35;vec2 R=u_resolution;vec4 O=vec4(0.0);float z=0.0,d=0.0,a=0.0;
+for(float i=0.0;i++<48.0;){vec3 p=z*normalize(2.0*gl_FragCoord.xyz-R.xyy),t;p.z+=9.0;t=p;a=(p.y-length(p.xz))/2.0;p.xz*=mat2(cos(a+vec4(0.0,5.0,8.0,0.0)));d=2.0;
+for(float j=0.0;j++<6.0;)d/=0.9,p+=sin(p.yzx*d-vec3(T,0.0,0.0)*6.0)/d;
+z+=d=min(length(p.xz),8.0-abs(p.y))/15.0/(2.0+cos(a-T));O+=vec4(7.0,5.0,z,0.0)*d/length(t.xz+(p.xz/2.0+3.0)*sin(T-a));}
+fragColor=tanh(O*O/1e3);}`;
+const mk=(ty,src)=>{const sh=gl.createShader(ty);gl.shaderSource(sh,src);gl.compileShader(sh);if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS))throw gl.getShaderInfoLog(sh);return sh};
+glProg=gl.createProgram();gl.attachShader(glProg,mk(gl.VERTEX_SHADER,vs));gl.attachShader(glProg,mk(gl.FRAGMENT_SHADER,fs));gl.linkProgram(glProg);
+const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
+const loc=gl.getAttribLocation(glProg,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+glT=gl.getUniformLocation(glProg,'u_time');glR=gl.getUniformLocation(glProg,'u_resolution');glReady=true;glSize()}catch(e){console.warn('vortex off',e)}}
+function glSize(){const c=cards[IDX('c13')];glCv.width=Math.round(c.clientWidth*.4);glCv.height=Math.round(c.clientHeight*.4)}
+addEventListener('resize',()=>{if(glReady)glSize()});
+function glDraw(t){if(!glReady)return;gl.viewport(0,0,glCv.width,glCv.height);gl.useProgram(glProg);gl.uniform2f(glR,glCv.width,glCv.height);gl.uniform1f(glT,t);gl.drawArrays(gl.TRIANGLES,0,6)}
+function frame(ms){requestAnimationFrame(frame);const t=ms/1000;if(paintOn||ms<2500)paintA.draw(t);if(paint2On)paintB.draw(t);if(glOn)glDraw(t)}
+requestAnimationFrame(frame);
+
+/* ruta: find the two tyres in the sprite, spin pixel spokes on them, and roll clods of earth under the truck */
+const truckImg=document.getElementById('truckImg'),wheelCv=document.getElementById('wheels'),groundCv=document.getElementById('ground'),wctx=wheelCv.getContext('2d'),gctx=groundCv.getContext('2d');
+let tW=0,tH=0,tyres=[],clods=[],truckTimer=null,truckTick=0,groundY=0;
+function truckInit(){tW=truckImg.naturalWidth;tH=truckImg.naturalHeight;wheelCv.width=groundCv.width=tW;wheelCv.height=groundCv.height=tH;
+  const oc=document.createElement('canvas');oc.width=tW;oc.height=tH;const o=oc.getContext('2d');o.drawImage(truckImg,0,0);const d=o.getImageData(0,0,tW,tH).data;
+  const dark=new Uint8Array(tW*tH);for(let i=0;i<tW*tH;i++)dark[i]=(d[i*4]+d[i*4+1]+d[i*4+2]<150)?1:0;
+  // tyres: the lowest dark pixels are the contact patches; split them left/right, then measure each tyre upward at its centre column
+  let bottom=-1;for(let y=tH-1;y>=0&&bottom<0;y--){let n=0;for(let x=0;x<tW;x++)if(dark[y*tW+x])n++;if(n>=6)bottom=y}
+  const xs=[];for(let y=Math.max(0,bottom-5);y<=bottom;y++)for(let x=0;x<tW;x++)if(dark[y*tW+x])xs.push(x);xs.sort((p,q)=>p-q);
+  const clusters=[];for(const x of xs){const c=clusters[clusters.length-1];if(c&&x-c.max<=18){c.max=x;c.sum+=x;c.n++}else clusters.push({min:x,max:x,sum:x,n:1})}
+  clusters.sort((p,q)=>q.n-p.n);tyres=clusters.slice(0,2).map(c=>{const cx=Math.round(c.sum/c.n);let top=bottom;
+    for(let y=bottom;y>=0;y--){const i=(y*tW+cx)*4,sat=Math.max(d[i],d[i+1],d[i+2])-Math.min(d[i],d[i+1],d[i+2]),lum=(d[i]+d[i+1]+d[i+2])/3;if(sat>45||lum>225){top=y+1;break}}
+    const r=Math.max(4,(bottom-top+1)/2);return{cx,cy:bottom-r,r,maxy:bottom}});
+  groundY=tyres.length?Math.max(...tyres.map(t=>t.maxy)):tH*0.85;
+  clods=[];for(let k=0;k<9;k++)clods.push(mkClod(Math.random()*tW));}
+function mkClod(x){return{x,y:groundY-1+Math.random()*4,w:2+(Math.random()*5|0),h:1+(Math.random()*2|0),v:1.5+Math.random()*2,c:Math.random()<.3?'#4f9a3a':(Math.random()<.5?'#7a4a2a':'#a0673a')}}
+function truckFrame(){truckTick++;
+  // spokes: 4 grey spokes rotating one step per tick over each tyre, plus a hub
+  wctx.clearRect(0,0,tW,tH);for(const t of tyres){const a=truckTick*0.5;wctx.strokeStyle='#fff';wctx.lineWidth=2;const r=t.r*0.72;for(let k=0;k<4;k++){const th=a+k*Math.PI/2;wctx.beginPath();wctx.moveTo(t.cx|0,t.cy|0);wctx.lineTo((t.cx+Math.cos(th)*r)|0,(t.cy+Math.sin(th)*r)|0);wctx.stroke()}wctx.fillStyle='#222';wctx.fillRect((t.cx-1)|0,(t.cy-1)|0,3,3)}
+  // ground: a dotted track line plus clods sliding left, and dust behind the rear tyre
+  gctx.clearRect(0,0,tW,tH);gctx.fillStyle='#e6e0d6';for(let x=(truckTick*2)%6;x<tW;x+=6)gctx.fillRect(x,groundY+3,3,1);
+  for(const c of clods){c.x-=c.v;if(c.x<-8){Object.assign(c,mkClod(tW+Math.random()*30))}gctx.fillStyle=c.c;gctx.fillRect(c.x|0,c.y|0,c.w,c.h);if(c.c==='#4f9a3a'){gctx.fillRect((c.x+1)|0,(c.y-1)|0,1,1)}}
+  if(tyres.length){const rear=tyres.reduce((a,b)=>a.cx<b.cx?a:b);gctx.fillStyle='rgba(180,170,160,.55)';for(let k=0;k<5;k++){const px=rear.cx-rear.r-2-k*4-((truckTick*3+k*7)%9),py=groundY-2-(k%3)-((truckTick+k*3)%4);gctx.fillRect(px|0,py|0,2+(k%2),1+(k%2))}}}
+function truckRun(on){clearInterval(truckTimer);const nm=document.getElementById('rutaName');nm.classList.remove('flick');if(on){if(!tW&&truckImg.complete&&truckImg.naturalWidth)truckInit();truckTimer=setInterval(truckFrame,90);setTimeout(()=>nm.classList.add('flick'),1800)}}
+truckImg.addEventListener('load',truckInit);
+/* timed sequences, replayed on every entry */
+function seq(els,cls,start,step){els.forEach(x=>x.classList.remove(cls));return els.map((x,i)=>setTimeout(()=>x.classList.add(cls),start+i*step))}
+let seqT=[];function play(...runs){seqT.forEach(clearTimeout);seqT=[].concat(...runs)}
+const colA=[...document.querySelectorAll('#colA .row2')],colB=[...document.querySelectorAll('#colB .row2')];
+const bubs=[...document.querySelectorAll('#bubbles .bub')],lns=[...document.querySelectorAll('#paper .ln, #paper .bar')],menu=[...document.querySelectorAll('#menu div')];
+const enterFx={
+  c8:()=>play(seq(ntfs,'in',500,850)),
+  c9:()=>play(seq(colA,'in',400,140),seq(colB,'in',400+5*140+1300,140)),
+  c10:()=>{bar.classList.remove('in');void bar.offsetWidth;bar.classList.add('in')},
+  c11:()=>document.querySelectorAll('[data-count]').forEach(count),
+  c14:()=>play(seq(bubs,'in',500,700)),
+  c18:()=>play(seq(lns,'in',400,110)),
+  c20:()=>play(seq(menu,'in',300,110)),
+};
+function onEnter(i){const id=cards[i].id;if(enterFx[id])enterFx[id]();paintOn=(id==='c4');paint2On=(id==='c16');glOn=(id==='c13');if(glOn&&!gl)glInit();truckRun(id==='c21')}
 const h0=parseInt(location.hash.slice(1));if(h0>=1&&h0<=N){deck.scrollLeft=(h0-1)*deck.clientWidth;setIdx(h0-1)}else setIdx(0);
 </script>
 </body>
